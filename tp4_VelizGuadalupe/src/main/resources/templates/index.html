@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>UNJU - FI</title>
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
+	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+
+<body>
+	<nav class="navbar navbar-expand-lg">
+		<div class="container">
+			<a class="navbar-brand" href="#">
+				<img class="img-logo" th:src="@{/images/fi-logo.png}">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item px-3">
+						<a class="nav-link active" aria-current="page" href="#">Inicio</a>
+					</li>
+					<li class="nav-item px-3">
+						<a class="nav-link" href="#">Acerca de</a>
+					</li>
+					<li class="nav-item px-3">
+						<a class="nav-link" href="#">Carreras</a>
+					</li>
+					<li class="nav-item px-3">
+						<a class="nav-link" href="#">Noticias</a>
+					</li>
+					<li class="nav-item px-3">
+						<a class="nav-link" href="#">Contacto</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<header class="header container-fluid py-5">
+		<div class="row	d-flex justify-content-center align-items-center">
+			<div class="col-12 col-md-4 d-flex justify-content-center">
+				<img class="img-header m-auto" th:src="@{/images/unju-logo.png}">
+			</div>
+			<div class="col-12 col-md-4 d-flex justify-content-center">
+				<img class="img-header m-auto" th:src="@{/images/fi-logo.png}">
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		<div class="m-auto row">
+			<main class="col-12 col-xl-9 pb-5">
+				<div class="row">
+					<h2 class="main-titulo col-12 text-center py-3">Novedades</h2>
+					<div class="noticia-card-container p-3 col-12 col-md-6">
+						<div class="noticia-card p-3">
+							<div class="noticia-header mb-3">
+								<img class="noticia-img" th:src="@{/images/noticia-1.jpeg}">
+							</div>
+							<div class="noticia-body px-3">
+								<h5 class="noticia-titulo">Convocatoria de Beca para la realización de Trabajo Final o
+									Tesina de Grado</h5>
+								<p class="noticia-parrafo">
+									La Secretaría de Ciencia y Técnica de la Facultad de Ingeniería (FI) de la
+									Universidad
+									Nacional de Jujuy (UNJU) se complace en anunciar la convocatoria de becas destinadas
+									a
+									alumnos avanzados que se encuentren cursando el último año de una carrera de grado
+									en
+									nuestra institución o de otras unidades académicas.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="noticia-card-container p-3 col-12 col-md-6">
+						<div class="noticia-card p-3">
+							<div class="noticia-header mb-3">
+								<img class="noticia-img" th:src="@{/images/noticia-2.jpg}">
+							</div>
+							<div class="noticia-body px-3">
+								<h5 class="noticia-titulo">Convocatoria de Beca para la realización de Trabajo Final o
+									Mesa Especial | Ingeniería de Procesos - Ing. Química (Plan 2007)</h5>
+								<p class="noticia-parrafo">
+									Se informa a los alumnos que se estableció la Mesa Especial para Ingeniería de
+									Procesos, correspondiente a la carrera Ing. Química - Plan 2007, a llevarse a cabo
+									el día lunes 27 de mayo - 18:30 hs. en Aula 9.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="noticia-card-container p-3 col-12 col-md-6">
+						<div class="noticia-card p-3">
+							<div class="noticia-header mb-3">
+								<img class="noticia-img" th:src="@{/images/noticia-3.jpeg}">
+							</div>
+							<div class="noticia-body px-3">
+								<h5 class="noticia-titulo"> Estudiantes y Profesionales | ¡Descubre el Futuro de la
+									Minería en la Semana Organizada por AJEIM de la FI UNJu!</h5>
+								<p class="noticia-parrafo">
+									La Asociación Jujeña de Estudiantes de Ingeniería de Minas y carreras afines
+									(AJEIM), en colaboración con la Facultad de Ingeniería de la Universidad Nacional de
+									Jujuy (UNJu), se complace en presentar el cronograma completo de la esperada "Semana
+									de la Minería". Este evento, respaldado por la RESOLUCIÓN FI 150/24, se llevará a
+									cabo del 7 al 9 de mayo de 2024, desde las 15:00 hasta las 20:30 horas, en la
+									Facultad de Ingeniería ubicada en Ítalo Palanca Nro 10.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="noticia-card-container p-3 col-12 col-md-6">
+						<div class="noticia-card p-3">
+							<div class="noticia-header mb-3">
+								<img class="noticia-img" th:src="@{/images/noticia-4.jpg}">
+							</div>
+							<div class="noticia-body px-3">
+								<h5 class="noticia-titulo"> Estudiantes de Ingeniería Industrial de la FI UNJu lideran
+									la JoSEII y el ENaR a nivel nacional</h5>
+								<p class="noticia-parrafo">
+									Desde el año pasado se promovió la formación de un equipo de estudiantes de
+									Ingeniería Industrial, liderado por Rodrigo Agustín Impa, quien desarrolló un
+									proyecto presentado en la edición 2023 del Congreso Argentino de Estudiantes de
+									Ingeniería Industrial (CAEII). Esto posibilitó la realización de las Jornadas
+									Simultáneas de Estudiantes de Ingeniería Industrial (JoSEII) y el Encuentro Nacional
+									de Representantes (ENaR) en la provincia de Jujuy, llevadas a cabo durante el 01 al
+									04 de marzo de este año, bajo la responsabilidad de este grupo de jóvenes.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+			<aside class="aside col-12 col-xl-3">
+				<div class="d-flex flex-column p-3">
+					<a class="aside-btn text-center py-2 mb-3" href="#">Biblioteca</a>
+					<a class="aside-btn text-center py-2 mb-3" href="#">Calendario Academico</a>
+					<a class="aside-btn text-center py-2 mb-3" href="#">Ingreso 2024</a>
+					<a class="aside-btn text-center py-2 mb-3" href="#">Instructivos SIU</a>
+					<a class="aside-btn text-center py-2 mb-3" href="#">Tramitacion de titulo</a>
+					<a class="aside-btn text-center py-2 mb-3" href="#">TFC 2do cuatrimetre</a>
+				</div>
+			</aside>
+		</div>
+	</div>
+
+	<footer class="footer container-fluid">
+		<div class="container m-auto row pt-5">
+			<div class="col-12 row">
+				<div class="d-flex flex-column col-12 col-md-6">
+					<p class="h4 mb-3">FACULTAD DE INGENIERÍA - UNJu</p>
+					<p>italo palanca N°10</p>
+					<p>San salvador de jujuy</p>
+					<p>info@fi.unju.edu.ar</p>
+				</div>
+				<div class="d-flex flex-column col-12 col-md-6">
+					<p class="h4 mb-3">REDES SOCIALES</p>
+					<a href="https://www.facebook.com/fiunju/" target="_blank">Facebook</a>
+					<a href="https://www.youtube.com/channel/UCgS9XJlKKSYI1oJ4lIOo77A" target="_blank">YouTube</a>
+					<a href="https://www.linkedin.com/school/facultad-de-ingenieria-unju" target="_blank">Linkedin</a>
+					<a href="https://www.instagram.com/fiunju/" target="_blank">Instagram</a>
+				</div>
+			</div>
+			<div class="col-12 pt-3 pb-2 text-center">
+				<p class="h6">Guadalupe Véliz</p>
+			</div>
+		</div>
+	</footer>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
