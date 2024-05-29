@@ -25,6 +25,21 @@
 	height: 100px;
 }
 
+.p-facultad {
+	color: #000;
+	font-size: 28px;
+	font-family: 'Times New Roman', serif;
+	font-weight: bold;
+	text-wrap: pretty;
+}
+
+.p-lema {
+	color: var(--color-primario);
+	font-size: 18px;
+	font-weight: bold;
+	text-wrap: pretty;
+}
+
 .navbar-nav {
 	width: 100%;
 	justify-content: center;
@@ -39,8 +54,15 @@ main {
 }
 
 .main-titulo {
+	background-color: var(--color-footer);
+	color: #FFF;
+}
+
+.main-descripcion {
 	background-color: var(--color-primario);
 	color: #FFF;
+	font-size: 14px;
+	text-wrap: pretty;
 }
 
 .noticia-card {
