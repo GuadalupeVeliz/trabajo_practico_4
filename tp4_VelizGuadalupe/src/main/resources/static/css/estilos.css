@@ -5,15 +5,69 @@
 }
 
 :root {
-	--color-primario: #2081A4;
+	--color-primario: #125582;
+	--color-primario-claro: #2081A4;
 	--color-secundario: #fafafa;
 	--color-fondo: #dfdfdf;
 	--color-footer: #20232E;
 }
 
-.navbar {
+.bg-primario {
+	background-color: var(--color-primario);
+}
+
+.bg-secundario {
 	background-color: var(--color-secundario);
 }
+
+.bg-fondo {
+	background-color: var(--color-fondo);
+}
+
+.bg-oscuro {
+	background-color: var(--color-footer);
+}
+
+.color-white {
+	color: white;
+}
+
+.color-primario {
+	color: var(--color-primario);
+}
+
+.font-size-18 {
+	font-size: 18px;
+}
+
+.font-size-16 {
+	font-size: 16px;
+}
+
+.font-size-14 {
+	font-size: 14px;
+}
+
+.font-size-12 {
+	font-size: 12px;
+}
+
+.font-bold {
+	font-weight: bold;
+}
+
+.h-full {
+	height: 100%;
+}
+
+.w-full {
+	width: 100%;
+}
+
+.border-radius-5 {
+	border-radius: 5px;
+}
+
 
 .img-logo {
 	height: 50px;
@@ -27,47 +81,10 @@
 
 .p-facultad {
 	color: #000;
-	font-size: 28px;
+	font-size: 32px;
 	font-family: 'Times New Roman', serif;
 	font-weight: bold;
 	text-wrap: pretty;
-}
-
-.p-lema {
-	color: var(--color-primario);
-	font-size: 18px;
-	font-weight: bold;
-	text-wrap: pretty;
-}
-
-.navbar-nav {
-	width: 100%;
-	justify-content: center;
-}
-
-.banner {
-	background-color: var(--color-fondo);
-}
-
-main {
-	background-color: var(--color-fondo);
-}
-
-.main-titulo {
-	background-color: var(--color-footer);
-	color: #FFF;
-}
-
-.main-descripcion {
-	background-color: var(--color-primario);
-	color: #FFF;
-	font-size: 14px;
-	text-wrap: pretty;
-}
-
-.noticia-card {
-	background-color: var(--color-secundario);
-	border-radius: 4px;
 }
 
 .noticia-img {
@@ -75,22 +92,10 @@ main {
 	height: 450px;
 }
 
-.noticia-titulo {
-	font-size: 16px;
-}
-
-.noticia-parrafo {
-	font-size: 12px;
-}
-
-aside {
-	background-color: var(--color-primario);
-}
-
 .aside-btn {
 	background-color: var(--color-secundario);
 	color: #000;
-	border-radius: 4px;
+	border-radius: 5px;
 	text-decoration: none;
 	transition: all 0.25 ease;
 }
@@ -99,14 +104,8 @@ aside {
 	background-color: var(--color-fondo);
 }
 
-.footer {
-	background-color: var(--color-footer);
-	color: #fff;
+.form {
+	max-width: 450px;
 }
-
-.footer-li {
-	list-style: none;
-}
-
 
 
