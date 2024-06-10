@@ -9,33 +9,41 @@ import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.model.Materia.Modalidad;
 
 public class MateriaList {
-	
+
 	private static ArrayList<Materia> lista = new ArrayList<>();
-	
+
 	public static ArrayList<Materia> getListaMateria() {
 		if (lista.isEmpty()) {
-			Docente docente1 = new Docente("001", "Juan", "Perez", "juan@unju.fi.com", "3881234567");
-			Docente docente2 = new Docente("002", "María", "Gómez", "maria@unju.fi.com", "3882345678");
-			Docente docente3 = new Docente("003", "Carlos", "López", "carlos@unju.fi.com", "3883456789");
-			Docente docente4 = new Docente("004", "Laura", "Martinez", "laura@unju.fi.com", "3884567890");
-			
-			Carrera carrera1 = new Carrera("INF", "Ingeniería Informática", 5, "Activa");
-			Carrera carrera2 = new Carrera("APU", "Analista Programador Universitario", 6, "Activa");
-			
-			lista.add(new Materia("MAT001", "Matemáticas I", "1º", 60, Modalidad.PRESENCIAL, docente1, carrera1));
-			lista.add(new Materia("FIS001", "Ingles I", "1º", 50, Modalidad.VIRTUAL, docente2, carrera2));
-			lista.add(new Materia("LIT001", "Introduccion a la Programacion", "3º", 45, Modalidad.PRESENCIAL, docente3, carrera1));
-			lista.add(new Materia("HIS001", "Programacion Visual", "2º", 40, Modalidad.VIRTUAL, docente4, carrera2));
-			lista.add(new Materia("BIO001", "Base de Datos I", "1º", 55, Modalidad.PRESENCIAL, docente1, carrera1));
-			lista.add(new Materia("QUI001", "Programacion Estructurada", "3º", 50, Modalidad.VIRTUAL, docente2, carrera2));
-			lista.add(new Materia("ING001", "Inglés V", "1º", 40, Modalidad.PRESENCIAL, docente3, carrera1));
-			lista.add(new Materia("SOC001", "Programacion Orientada a Objetos", "2º", 45, Modalidad.VIRTUAL, docente4, carrera2));
-			lista.add(new Materia("ART001", "Artes Plásticas", "3º", 60, Modalidad.PRESENCIAL, docente1, carrera1));
-			lista.add(new Materia("TEC001", "Programacion Web", "3º", 50, Modalidad.VIRTUAL, docente2, carrera2));
+			Docente brizuela = DocenteList.getListaDocentes().get(0);
+			Docente canizares = DocenteList.getListaDocentes().get(1);
+			Docente perez = DocenteList.getListaDocentes().get(2);
+			Docente liberatori = DocenteList.getListaDocentes().get(3);
+			Docente battezzati = DocenteList.getListaDocentes().get(4);
+			Docente cornell = DocenteList.getListaDocentes().get(5);
+			Docente tarifa = DocenteList.getListaDocentes().get(6);
+			Docente vega = DocenteList.getListaDocentes().get(7);
+
+			Carrera apu = CarreraList.getListaCarreras().get(1);
+
+			lista.add(new Materia("AP001", "Ingles I", 1, 75, Modalidad.PRESENCIAL, brizuela, apu));
+			lista.add(new Materia("AP002", "Herramientas Informaticas I", 1, 90, Modalidad.VIRTUAL, canizares, apu));
+			lista.add(new Materia("AP003", "Programación Estructurada", 1, 90, Modalidad.VIRTUAL, perez, apu));
+			lista.add(new Materia("AP004", "Ingles II", 1, 60, Modalidad.PRESENCIAL, brizuela, apu));
+			lista.add(new Materia("AP005", "Herramientas Informaticas II", 1, 90, Modalidad.VIRTUAL, canizares, apu));
+			lista.add(new Materia("AP006", "Estructura de Datos", 1, 90, Modalidad.VIRTUAL, perez, apu));
+			lista.add(new Materia("AP007", "Base de Datos I", 1, 75, Modalidad.VIRTUAL, liberatori, apu));
+			lista.add(new Materia("AP008", "Lab. de Sist. Operativos I", 1, 75, Modalidad.VIRTUAL, battezzati, apu));
+
+			lista.add(new Materia("AP009", "Ingles III", 2, 60, Modalidad.PRESENCIAL, cornell, apu));
+			lista.add(new Materia("AP010", "Algebra I", 2, 60, Modalidad.PRESENCIAL, tarifa, apu));
+			lista.add(new Materia("AP011", "Base de Datos II", 2, 75, Modalidad.PRESENCIAL, liberatori, apu));
+			lista.add(new Materia("AP012", "Programacion Visual", 2, 50, Modalidad.VIRTUAL, vega, apu));
+			lista.add(new Materia("AP013", "Lab. de Sist. Operativos II", 2, 75, Modalidad.VIRTUAL, battezzati, apu));
+
 		}
 		return lista;
 	}
-	
+
 	public static Materia findMateriaByCodigo(String codigo) {
 		for (Materia materia : lista) {
 			if (materia.getCodigo().equals(codigo)) {
@@ -44,37 +52,49 @@ public class MateriaList {
 		}
 		return null;
 	}
-	
-	public static void addMateria(Materia materia) {
-		lista.add(materia);
-	}
-	
-	public static void updateMateria(Materia materia) {
-		Iterator<Materia> materiasIterator = lista.iterator();
-		boolean encontrado = false;
-		while (materiasIterator.hasNext() && !encontrado) {
-			Materia mat = materiasIterator.next();
-			if (mat.getCodigo().equals(mat.getCodigo())) {
-				encontrado = true;
-				mat.setCantidadHoras(materia.getCantidadHoras());
-				mat.setCarrera(materia.getCarrera());
-				mat.setCurso(materia.getCurso());
-				mat.setDocente(materia.getDocente());
-				mat.setModalidad(materia.getModalidad());
-				mat.setNombre(materia.getNombre());
+
+	public static boolean addMateria(Materia materia) {
+		for (Materia m : lista) {
+			if (m.getCodigo().equals(materia.getCodigo())) {
+				return false;
 			}
 		}
+		lista.add(materia);
+		return true;
 	}
-	
-	public static void removeMateria(Materia materia) {
+
+	public static boolean updateMateria(Materia materia) {
 		Iterator<Materia> materiasIterator = lista.iterator();
 		boolean encontrado = false;
+		boolean modificado = false;
+		while (materiasIterator.hasNext() && !encontrado) {
+			Materia mat = materiasIterator.next();
+			if (mat.getCodigo().equals(materia.getCodigo())) {
+				encontrado = true;
+				mat.setNombre(materia.getNombre());
+				mat.setCurso(materia.getCurso());
+				mat.setCantidadHoras(materia.getCantidadHoras());
+				mat.setModalidad(materia.getModalidad());
+				mat.setDocente(materia.getDocente());
+				mat.setCarrera(materia.getCarrera());
+				modificado = true;
+			}
+		}
+		return modificado;
+	}
+
+	public static boolean removeMateria(Materia materia) {
+		Iterator<Materia> materiasIterator = lista.iterator();
+		boolean encontrado = false;
+		boolean eliminado = false;
 		while (materiasIterator.hasNext() && !encontrado) {
 			if (materiasIterator.next().getCodigo().equals(materia.getCodigo())) {
 				encontrado = true;
 				materiasIterator.remove();
+				eliminado = true;
 			}
 		}
+		return eliminado;
 	}
-	
+
 }

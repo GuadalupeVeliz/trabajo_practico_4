@@ -12,7 +12,7 @@ public class AlumnoList {
 
 	public static ArrayList<Alumno> getListaAlumnos() {
 		if (lista.isEmpty()) {
-			lista.add(new Alumno("43527103", "Guadalupe", "Véliz", "luveliz@gmail.com", "3884774333",
+			lista.add(new Alumno("43527103", "Guadalupe", "Véliz", "luveliz@gmail.com", "3884334777",
 					LocalDate.of(2001, 8, 11), "Gral Savio, Palpala", "4317"));
 			lista.add(new Alumno("41123456", "Gabriela", "Rodríguez", "grodriguez@gmail.com", "3881122334",
 					LocalDate.of(1986, 5, 14), "Calle Rivadavia 123, San Pedro", "3456"));
@@ -46,6 +46,23 @@ public class AlumnoList {
 					LocalDate.of(1989, 2, 28), "Av. Uruguay 456, Libertador", "9900"));
 			lista.add(new Alumno("41345678", "Andrés", "Mendoza", "amendoza@gmail.com", "3885678901",
 					LocalDate.of(1993, 11, 13), "Calle Sarmiento 789, Yuto", "1234"));
+			lista.add(new Alumno("31567890", "Laura", "Gómez", "lgomez@gmail.com", "3886789012",
+					LocalDate.of(1991, 5, 17), "Calle Belgrano 123, San Pedro", "5678"));
+			lista.add(new Alumno("42678901", "Diego", "Martínez", "dmartinez@gmail.com", "3887890123",
+					LocalDate.of(1995, 8, 25), "Av. Rivadavia 456, Palpalá", "9101"));
+			lista.add(new Alumno("33456789", "María", "López", "mlopez@gmail.com", "3888901234",
+					LocalDate.of(1988, 9, 12), "Calle San Martín 789, Perico", "2345"));
+			lista.add(new Alumno("44567890", "Pablo", "Rodríguez", "prodriguez@gmail.com", "3889012345",
+					LocalDate.of(1994, 12, 3), "Av. Independencia 321, El Carmen", "6789"));
+			lista.add(new Alumno("35345678", "Cecilia", "Pérez", "cperez@gmail.com", "3880123456",
+					LocalDate.of(1992, 4, 20), "Calle Libertad 654, Humahuaca", "3456"));
+			lista.add(new Alumno("46678901", "Fernando", "Sánchez", "fsanchez@gmail.com", "3881234567",
+					LocalDate.of(1996, 7, 14), "Av. 9 de Julio 987, Tilcara", "7890"));
+			lista.add(new Alumno("37345678", "Ana", "García", "agarcia@gmail.com", "3882345678",
+					LocalDate.of(1990, 1, 30), "Calle Las Heras 432, San Salvador", "4567"));
+			lista.add(new Alumno("48789012", "Luis", "Ramírez", "lramirez@gmail.com", "3883456789",
+					LocalDate.of(1997, 10, 18), "Av. Entre Ríos 876, La Quiaca", "8901"));
+
 		}
 		return lista;
 	}
@@ -59,13 +76,20 @@ public class AlumnoList {
 		return null;
 	}
 
-	public static void addAlumno(Alumno alumno) {
+	public static boolean addAlumno(Alumno alumno) {
+		for (Alumno a : lista) {
+			if (a.getDni().equals(alumno.getDni()) || a.getLu().equals(alumno.getLu())) {
+				return false;
+			}
+		}
 		lista.add(alumno);
+		return true;
 	}
 
-	public static void updateAlumno(Alumno alumno) {
+	public static boolean updateAlumno(Alumno alumno) {
 		Iterator<Alumno> alumnosIterator = lista.iterator();
 		boolean encontrado = false;
+		boolean modificado = false;
 		while (alumnosIterator.hasNext() && !encontrado) {
 			Alumno alu = alumnosIterator.next();
 			if (alu.getDni().equals(alumno.getDni())) {
@@ -77,19 +101,24 @@ public class AlumnoList {
 				alu.setFechaNacimiento(alumno.getFechaNacimiento());
 				alu.setDomicilio(alumno.getDomicilio());
 				alu.setLu(alumno.getLu());
+				modificado = true;
 			}
 		}
+		return modificado;
 	}
 
-	public static void removeAlumno(Alumno alumno) {
+	public static boolean removeAlumno(Alumno alumno) {
 		Iterator<Alumno> alumnoIterator = lista.iterator();
 		boolean encontrado = false;
+		boolean eliminado = false;
 		while (alumnoIterator.hasNext() && !encontrado) {
 			if (alumnoIterator.next().getDni().equals(alumno.getDni())) {
 				encontrado = true;
 				alumnoIterator.remove();
+				eliminado = true;
 			}
 		}
+		return eliminado;
 	}
 
 }
