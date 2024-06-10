@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Agregar una Carrera</title>
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
+	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+	<nav th:replace="~{/layouts/header :: header}"></nav>
+
+	<main class="container bg-fondo pt-3 pb-5">
+		<form class="form m-auto bg-primario py-3 px-4 border-radius-5 color-white"
+			th:action="${edicion} ? @{/carreras/modificar} : @{/carreras/guardar}" th:object="${unaCarrera}"
+			method="post" enctype="multipart/form-data">
+
+			<div class="mb-3">
+				<h3 th:text="${edicion ? 'Modificar Carrera' : 'Agregar Nueva Carrera'}"></h3>
+			</div>
+			<div class="mb-3">
+				<label for="codigo" class="form-label">Codigo:</label>
+				<input type="text" th:readonly="${edicion}" th:class="'form-control '+${edicion ? 'opacity-50' : ''}"
+					id="codigo" th:field="*{codigo}" required>
+			</div>
+			<div class="mb-3">
+				<label for="nombre" class="form-label">Nombre:</label>
+				<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+			</div>
+			<div class="mb-3">
+				<label for="cantidadAnios" class="form-label">Cantidad de Años:</label>
+				<input type="number" class="form-control" id="cantidadAnios" th:field="*{cantidadAnios}" required>
+			</div>
+			<div class="mb-4">
+				<label for="estado" class="form-label">Estado:</label>
+				<input type="text" class="form-control" id="estado" th:field="*{estado}" required>
+			</div>
+			<div class="mb-3 d-flex">
+				<input type="submit" class="btn btn-light px-3"
+					th:value="${edicion ? 'Guardar cambios' : 'Registrar'}"></input>
+			</div>
+
+		</form>
+	</main>
+
+	<footer th:replace="~{/layouts/footer :: footer}"></footer>
+
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

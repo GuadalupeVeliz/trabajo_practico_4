@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Agregar un alumno</title>
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
+	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+	<nav th:replace="~{/layouts/header :: header}"></nav>
+
+	<main class="container bg-fondo pt-3 pb-5">
+		<form class="form m-auto bg-primario py-3 px-4 border-radius-5 color-white"
+			th:action="${edicion} ? @{/alumnos/modificar} : @{/alumnos/guardar}" th:object="${unAlumno}" method="post"
+			enctype="multipart/form-data">
+
+			<div class="mb-3">
+				<h3 th:text="${edicion ? 'Modificar Alumno' : 'Agregar Nuevo Alumno'}"></h3>
+			</div>
+			<div class="mb-3">
+				<label for="dni" class="form-label">DNI:</label>
+				<input type="number" th:readonly="${edicion}" th:class="'form-control '+${edicion ? 'opacity-50' : ''}"
+					id="dni" th:field="*{dni}" required>
+			</div>
+			<div class="mb-3">
+				<label for="nombre" class="form-label">Nombre:</label>
+				<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+			</div>
+			<div class="mb-3">
+				<label for="apellido" class="form-label">Apellido:</label>
+				<input type="text" class="form-control" id="apellido" th:field="*{apellido}" required>
+			</div>
+			<div class="mb-3">
+				<label for="email" class="form-label">Email:</label>
+				<input type="email" class="form-control" id="email" th:field="*{email}" required>
+			</div>
+			<div class="mb-3">
+				<label for="telefono" class="form-label">Telefono:</label>
+				<input type="number" class="form-control" id="telefono" th:field="*{telefono}" required>
+			</div>
+			<div class="mb-3">
+				<label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+				<input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento"
+					th:value="${unAlumno.fechaNacimiento}" required>
+			</div>
+			<div class="mb-3">
+				<label for="domicilio" class="form-label">Domicilio:</label>
+				<input type="text" class="form-control" id="domicilio" th:field="*{domicilio}" required>
+			</div>
+			<div class="mb-4">
+				<label for="lu" class="form-label">Número de libreta universitaria:</label>
+				<input type="number" th:readonly="${edicion}" th:class="'form-control '+${edicion ? 'opacity-50' : ''}"
+					id="lu" th:field="*{lu}" required>
+			</div>
+			<div class="mb-3 d-flex">
+				<input type="submit" class="btn btn-light"
+					th:value="${edicion ? 'Guardar cambios' : 'Registrar alumno'}"></input>
+			</div>
+
+		</form>
+	</main>
+
+	<footer th:replace="~{/layouts/footer :: footer}"></footer>
+
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

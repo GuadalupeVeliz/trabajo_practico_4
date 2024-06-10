@@ -1,0 +1,92 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Listado de materias</title>
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
+	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+	<nav th:replace="~{/layouts/header :: header}"></nav>
+
+	<main class="container bg-fondo p-0 d-flex flex-column">
+
+		<div class="bg-primario color-white">
+			<h2 class="text-center py-3 px-3">Listado de materias</h2>
+		</div>
+		<div class="pt-3 pb-5 px-3">
+			<div class="d-flex">
+				<a class="btn btn-dark text-center py-2 mb-3" th:href="@{/materias/nuevo}">Agregar Materia</a>
+			</div>
+			<div th:if="${msgAdd}" th:text="${msgAdd}" class="alert alert-success" role="alert"></div>
+			<div th:if="${msgEdit}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
+			<div th:if="${msgRem}" th:text="${msgRem}" class="alert alert-danger" role="alert"></div>
+			<div th:if="${msgErr}" th:text="${msgErr}" class="alert alert-danger" role="alert"></div>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped align-middle m-0">
+					<thead class="table-dark">
+						<tr class="text-center">
+							<th scope="col">Codigo</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Curso</th>
+							<th scope="col">Cant. de horas</th>
+							<th scope="col">Modalidad</th>
+							<th scope="col">Docente</th>
+							<th scope="col">Carrera</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody class="table-group-divider">
+						<tr class="text-center" th:each="m : ${materias}">
+							<td th:text="${m.codigo}"></td>
+							<td th:text="${m.nombre}" class="text-start"></td>
+							<td th:text="${m.curso}+'° año'"></td>
+							<td th:text="${m.cantidadHoras}+' horas.'"></td>
+							<td th:text="${m.modalidad}"></td>
+							<td th:text="${m.docente.nombre}+' '+${m.docente.apellido}" class="text-start"></td>
+							<td th:text="${m.carrera.nombre}"></td>
+							<td class="text-center">
+								<a class="btn btn-sm btn-secondary mb-1 mb-xxl-0"
+									th:href="@{/materias/modificar/}+${m.codigo}">Modificar</a>
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+									th:data-bs-target="'#exampleModal'+${m.codigo}">
+									Eliminar
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" th:each="m : ${materias}" th:id="'exampleModal'+${m.codigo}" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title fs-5" id="exampleModalLabel">¿Está seguro?</h2>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						Desea eliminar la materia <span th:text="${m.nombre}+' con codigo: '+${m.codigo}"></span>?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+						<a class="btn btn-danger" th:href="@{/materias/eliminar/}+${m.codigo}">Eliminar</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="~{/layouts/footer :: footer}"></footer>
+
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

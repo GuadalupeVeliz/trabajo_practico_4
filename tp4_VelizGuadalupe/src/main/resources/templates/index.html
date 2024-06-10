@@ -13,7 +13,7 @@
 <body>
 	<nav th:replace="~{/layouts/header :: header}"></nav>
 
-	<div class="banner container-fluid p-5">
+	<div class="bg-fondo container-fluid p-5">
 		<div class="row	d-flex px-4 justify-content-center align-items-center">
 			<div class="col-12 col-md-4 d-flex justify-content-center mb-3 mb-md-0">
 				<img class="img-header m-auto" th:src="@{/images/unju-logo.png}">
@@ -21,33 +21,34 @@
 			<p class="p-facultad col-12 col-md-4 d-flex justify-content-center mb-3 mb-md-0 text-center">
 				Facultad de Ingeniería
 			</p>
-			<p class="p-lema col-12 col-md-4 d-flex justify-content-center mb-3 mb-md-0 text-center">
+			<p
+				class="color-primario font-size-18 font-bold col-12 col-md-4 d-flex justify-content-center mb-3 mb-md-0 text-center">
 				Innovación y Conocimiento para el Futuro
 			</p>
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="container p-0">
 		<div class="m-auto row">
-			<main class="col-12 col-xl-9 pb-5">
+			<main class="col-12 col-xl-9 pb-5 bg-fondo">
 				<div class="row">
-					<p class="main-descripcion col-12 py-4 px-4 m-0">
+					<p class="bg-primario color-white font-size-14 col-12 py-4 px-4 m-0">
 						La Facultad de Ingeniería es un centro académico de excelencia dedicado a la formación integral
 						de ingenieros altamente capacitados y comprometidos con el desarrollo tecnológico y social.
 						Nuestra misión es preparar profesionales con una sólida base teórica y práctica, capaces de
 						enfrentar y resolver los desafíos del mundo moderno a través de la innovación, la investigación
 						y el liderazgo.
 					</p>
-					<h2 class="main-titulo col-12 text-center py-3 m-0">Noticias Recientes</h2>
+					<h2 class="bg-oscuro color-white col-12 text-center py-3 m-0">Noticias Recientes</h2>
 					<div class="noticia-card-container p-3 col-12 col-md-6">
 						<div class="noticia-card p-3">
 							<div class="noticia-header mb-3">
 								<img class="noticia-img" th:src="@{/images/noticia-1.jpeg}">
 							</div>
 							<div class="noticia-body px-3">
-								<h5 class="noticia-titulo">Convocatoria de Beca para la realización de Trabajo Final o
+								<h5 class="font-size-16">Convocatoria de Beca para la realización de Trabajo Final o
 									Tesina de Grado</h5>
-								<p class="noticia-parrafo">
+								<p class="font-size-12">
 									La Secretaría de Ciencia y Técnica de la Facultad de Ingeniería (FI) de la
 									Universidad
 									Nacional de Jujuy (UNJU) se complace en anunciar la convocatoria de becas destinadas
@@ -65,9 +66,9 @@
 								<img class="noticia-img" th:src="@{/images/noticia-2.jpg}">
 							</div>
 							<div class="noticia-body px-3">
-								<h5 class="noticia-titulo">Convocatoria de Beca para la realización de Trabajo Final o
+								<h5 class="font-size-16">Convocatoria de Beca para la realización de Trabajo Final o
 									Mesa Especial | Ingeniería de Procesos - Ing. Química (Plan 2007)</h5>
-								<p class="noticia-parrafo">
+								<p class="font-size-12">
 									Se informa a los alumnos que se estableció la Mesa Especial para Ingeniería de
 									Procesos, correspondiente a la carrera Ing. Química - Plan 2007, a llevarse a cabo
 									el día lunes 27 de mayo - 18:30 hs. en Aula 9.
@@ -81,9 +82,9 @@
 								<img class="noticia-img" th:src="@{/images/noticia-3.jpeg}">
 							</div>
 							<div class="noticia-body px-3">
-								<h5 class="noticia-titulo"> Estudiantes y Profesionales | ¡Descubre el Futuro de la
+								<h5 class="font-size-16"> Estudiantes y Profesionales | ¡Descubre el Futuro de la
 									Minería en la Semana Organizada por AJEIM de la FI UNJu!</h5>
-								<p class="noticia-parrafo">
+								<p class="font-size-12">
 									La Asociación Jujeña de Estudiantes de Ingeniería de Minas y carreras afines
 									(AJEIM), en colaboración con la Facultad de Ingeniería de la Universidad Nacional de
 									Jujuy (UNJu), se complace en presentar el cronograma completo de la esperada "Semana
@@ -100,9 +101,9 @@
 								<img class="noticia-img" th:src="@{/images/noticia-4.jpg}">
 							</div>
 							<div class="noticia-body px-3">
-								<h5 class="noticia-titulo"> Estudiantes de Ingeniería Industrial de la FI UNJu lideran
+								<h5 class="font-size-16"> Estudiantes de Ingeniería Industrial de la FI UNJu lideran
 									la JoSEII y el ENaR a nivel nacional</h5>
-								<p class="noticia-parrafo">
+								<p class="font-size-12">
 									Desde el año pasado se promovió la formación de un equipo de estudiantes de
 									Ingeniería Industrial, liderado por Rodrigo Agustín Impa, quien desarrolló un
 									proyecto presentado en la edición 2023 del Congreso Argentino de Estudiantes de
@@ -116,7 +117,7 @@
 					</div>
 				</div>
 			</main>
-			<aside class="aside col-12 col-xl-3">
+			<aside class="aside bg-primario col-12 col-xl-3">
 				<div class="d-flex flex-column p-3">
 					<a class="aside-btn text-center py-2 mb-3" href="#">Biblioteca</a>
 					<a class="aside-btn text-center py-2 mb-3" href="#">Calendario Academico</a>
@@ -124,13 +125,17 @@
 					<a class="aside-btn text-center py-2 mb-3" href="#">Instructivos SIU</a>
 					<a class="aside-btn text-center py-2 mb-3" href="#">Tramitacion de titulo</a>
 					<a class="aside-btn text-center py-2 mb-3" href="#">TFC 2do cuatrimetre</a>
+					<a class="aside-btn text-center py-2 mb-3" th:href="@{/alumnos/lista}">Lista de Alumnos</a>
+					<a class="aside-btn text-center py-2 mb-3" th:href="@{/docentes/lista}">Lista de Docentes</a>
+					<a class="aside-btn text-center py-2 mb-3" th:href="@{/materias/lista}">Lista de Materias</a>
+					<a class="aside-btn text-center py-2 mb-3" th:href="@{/carreras/lista}">Lista de Carreras</a>
 				</div>
 			</aside>
 		</div>
 	</div>
 
 	<footer th:replace="~{/layouts/footer :: footer}"></footer>
-	
+
 	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 
