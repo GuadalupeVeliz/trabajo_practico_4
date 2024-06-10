@@ -49,7 +49,7 @@ public class MateriaController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardarMateria(@ModelAttribute("codigo") Materia materia, Model model,
+	public String guardarMateria(@ModelAttribute("unaMateria") Materia materia, Model model,
 			RedirectAttributes redirectAttributes) {
 		unDocente = DocenteList.findDocenteByLegajo(materia.getDocente().getLegajo());
 		unaCarrera = CarreraList.findCarreraByCodigo(materia.getCarrera().getCodigo());

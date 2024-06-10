@@ -35,7 +35,7 @@ public class CarreraController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardarCarrera(@ModelAttribute("unDocente") Carrera carrera, Model model,
+	public String guardarCarrera(@ModelAttribute("unaCarrera") Carrera carrera, Model model,
 			RedirectAttributes redirectAttributes) {
 		if (CarreraList.addCarrera(carrera)) {
 			String msg = "Se ha agregado la carrera '" + carrera.getNombre() + "' con codigo '" + carrera.getCodigo()
