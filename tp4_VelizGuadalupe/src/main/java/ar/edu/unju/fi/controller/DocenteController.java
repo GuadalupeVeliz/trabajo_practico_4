@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ar.edu.unju.fi.collections.DocenteList;
-import ar.edu.unju.fi.model.Docente;
+import ar.edu.unju.fi.dto.DocenteDto;
+import ar.edu.unju.fi.service.DocenteService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,37 +19,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class DocenteController {
 
 	@Autowired
-	private static Docente unDocente;
+	private static DocenteDto unDocente;
+	
+	@Autowired
+	private DocenteService docenteService; 
 
 	@GetMapping("/lista")
 	public String getListaDocente(Model model) {
-		model.addAttribute("docentes", DocenteList.getListaDocentes());
+		model.addAttribute("docentes", docenteService.getListaDocentes());
 		return "listaDocentes";
 	}
 
 	@GetMapping("/nuevo")
 	public String getNuevoDocente(Model model) {
-		unDocente = new Docente();
+		unDocente = new DocenteDto();
 		model.addAttribute("unDocente", unDocente);
 		model.addAttribute("edicion", false);
 		return "formDocente";
 	}
 
 	@PostMapping("/guardar")
-	public String guardarDocente(@ModelAttribute("unDocente") Docente docente, Model model,
+	public String guardarDocente(@ModelAttribute("unDocente") DocenteDto docenteDto, Model model,
 			RedirectAttributes redirectAttributes) {
-		if (DocenteList.addDocente(docente)) {
-			String msg = "Se agregó al docente " + docente.getNombre() + " " + docente.getApellido() + " con éxito.";
+		if (docenteService.addDocente(docenteDto)) {
+			String msg = "Se agregó al docente " + docenteDto.getNombre() + " " + docenteDto.getApellido() + " con éxito.";
 			redirectAttributes.addFlashAttribute("msgAdd", msg);
 		} else {
-			redirectAttributes.addFlashAttribute("msgErr", "Error al agregar docente (el Legajo '" + docente.getLegajo() + "' ya existe).");
+			redirectAttributes.addFlashAttribute("msgErr", "Error al agregar docente (el Legajo '" + docenteDto.getLegajo() + "' ya existe).");
 		}
 		return "redirect:/docentes/lista";
 	}
 
 	@GetMapping("/modificar/{legajo}")
 	public String getModificarDocente(@PathVariable("legajo") String legajo, Model model) {
-		unDocente = DocenteList.findDocenteByLegajo(legajo);
+		unDocente = docenteService.findDocenteByLegajo(legajo);
 		if (unDocente != null) {
 			model.addAttribute("unDocente", unDocente);
 			model.addAttribute("edicion", true);
@@ -60,22 +63,22 @@ public class DocenteController {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarDocente(@ModelAttribute("unDocente") Docente docente, Model model, RedirectAttributes redirectAttributes) {
-		if (DocenteList.updateDocente(docente)) {
-			String msg = "Se modificó al docente " + docente.getNombre() + " " + docente.getApellido() + " con éxito.";
+	public String modificarDocente(@ModelAttribute("unDocente") DocenteDto docenteDto, Model model, RedirectAttributes redirectAttributes) {
+		if (docenteService.updateDocente(docenteDto)) {
+			String msg = "Se modificó al docente " + docenteDto.getNombre() + " " + docenteDto.getApellido() + " con éxito.";
 			redirectAttributes.addFlashAttribute("msgEdit", msg);
 		} else {
-			redirectAttributes.addFlashAttribute("msgErr", "Error al modificar docente (el Legajo '" + docente.getLegajo() + "' ya existe).");
+			redirectAttributes.addFlashAttribute("msgErr", "Error al modificar docente (el Legajo '" + docenteDto.getLegajo() + "' ya existe).");
 		}
 		return "redirect:/docentes/lista";
 	}
 
 	@GetMapping("/eliminar/{legajo}")
 	public String eliminarDocente(@PathVariable("legajo") String legajo, RedirectAttributes redirectAttributes) {
-		Docente docente = DocenteList.findDocenteByLegajo(legajo);
-		if (docente != null) {
-			String msg = "Se eliminó al docente " + docente.getNombre() + " " + docente.getApellido() + " con éxito.";
-			if (DocenteList.removeDocente(docente)) {
+		DocenteDto docenteDto = docenteService.findDocenteByLegajo(legajo);
+		if (docenteDto != null) {
+			String msg = "Se eliminó al docente " + docenteDto.getNombre() + " " + docenteDto.getApellido() + " con éxito.";
+			if (docenteService.removeDocente(docenteDto.getLegajo())) {
 				redirectAttributes.addFlashAttribute("msgRem", msg);				
 			} else {
 				redirectAttributes.addFlashAttribute("msgErr", "Error al eliminar docente (el docente no exite).");
