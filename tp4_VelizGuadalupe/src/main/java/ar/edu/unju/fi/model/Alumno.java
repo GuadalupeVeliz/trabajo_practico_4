@@ -4,95 +4,45 @@ import java.time.LocalDate;
 
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Component
+@Entity
+@Table(name = "Alumnos")
 public class Alumno {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(name = "dni", nullable = false, unique = true)
 	private String dni;
+	@Column(name = "nombre", nullable = false)
 	private String nombre;
+	@Column(name = "apelido", nullable = false)
 	private String apellido;
+	@Column(name = "email", nullable = false)
 	private String email;
+	@Column(name = "telefono", nullable = false)
 	private String telefono;
+	@Column(name = "fechaNacimiento", nullable = false)
 	private LocalDate fechaNacimiento;
+	@Column(name = "domicilio", nullable = false)
 	private String domicilio;
+	@Column(name = "lu", nullable = false)
 	private String lu;
-	
-	public Alumno() {
-	}
 
-	public Alumno(String dni, String nombre, String apellido, String email, String telefono, LocalDate fechaNacimiento,
-			String domicilio, String lu) {
-		super();
-		this.dni = dni;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
-		this.telefono = telefono;
-		this.fechaNacimiento = fechaNacimiento;
-		this.domicilio = domicilio;
-		this.lu = lu;
-	}
 
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public LocalDate getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(LocalDate fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	public String getDomicilio() {
-		return domicilio;
-	}
-
-	public void setDomicilio(String domicilio) {
-		this.domicilio = domicilio;
-	}
-
-	public String getLu() {
-		return lu;
-	}
-
-	public void setLu(String lu) {
-		this.lu = lu;
-	}
-	
 }
