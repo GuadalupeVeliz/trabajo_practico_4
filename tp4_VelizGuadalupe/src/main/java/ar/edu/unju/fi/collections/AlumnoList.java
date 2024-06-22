@@ -10,7 +10,7 @@ public class AlumnoList {
 
 	private static ArrayList<Alumno> lista = new ArrayList<>();
 
-	public static ArrayList<Alumno> getListaAlumnos() {
+	/*public static ArrayList<Alumno> getListaAlumnos() {
 		if (lista.isEmpty()) {
 			lista.add(new Alumno("43527103", "Guadalupe", "Véliz", "luveliz@gmail.com", "3884334777",
 					LocalDate.of(2001, 8, 11), "Gral Savio, Palpala", "4317"));
@@ -65,7 +65,7 @@ public class AlumnoList {
 
 		}
 		return lista;
-	}
+	}*/
 
 	public static Alumno findAlumnoByDni(String dni) {
 		for (Alumno alumno : lista) {
