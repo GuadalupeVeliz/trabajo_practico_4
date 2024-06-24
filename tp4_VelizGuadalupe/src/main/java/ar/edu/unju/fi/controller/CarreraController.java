@@ -10,48 +10,45 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ar.edu.unju.fi.collections.CarreraList;
-import ar.edu.unju.fi.model.Carrera;
+import ar.edu.unju.fi.dto.CarreraDTO;
+import ar.edu.unju.fi.service.CarreraService;
 
 @Controller
 @RequestMapping("/carreras")
 public class CarreraController {
 
 	@Autowired
-	private Carrera unaCarrera;
+	private CarreraService carreraService;
+	private CarreraDTO unaCarreraDTO;
 
 	@GetMapping("/lista")
 	public String getListaCarrera(Model model) {
-		model.addAttribute("carreras", CarreraList.getListaCarreras());
+		model.addAttribute("carreras", carreraService.getCarreras());
 		return "listaCarreras";
 	}
+	
 
 	@GetMapping("/nuevo")
 	public String getNuevoCarrera(Model model) {
-		unaCarrera = new Carrera();
-		model.addAttribute("unaCarrera", unaCarrera);
+		CarreraDTO unaCarreraDTO = new CarreraDTO();
+		model.addAttribute("unaCarrera", unaCarreraDTO);
 		model.addAttribute("edicion", false);
 		return "formCarrera";
 	}
 
 	@PostMapping("/guardar")
-	public String guardarCarrera(@ModelAttribute("unaCarrera") Carrera carrera, Model model,
+	public String guardarCarrera(@ModelAttribute("unaCarrera") CarreraDTO carreraDTO, Model model,
 			RedirectAttributes redirectAttributes) {
-		if (CarreraList.addCarrera(carrera)) {
-			String msg = "Se ha agregado la carrera '" + carrera.getNombre() + "' con codigo '" + carrera.getCodigo()
-					+ "' con éxito.";
-			redirectAttributes.addFlashAttribute("msgAdd", msg);
-		} else {
-			redirectAttributes.addFlashAttribute("msgErr", "Error al agregar carrera (el Codigo '" + carrera.getCodigo() + "' ya existe).");
-		}
+		
+		carreraService.saveCarrera(carreraDTO);
 		return "redirect:/carreras/lista";
 	}
 
-	@GetMapping("/modificar/{codigo}")
-	public String getModificarCarrera(@PathVariable("codigo") String codigo, Model model) {
-		unaCarrera = CarreraList.findCarreraByCodigo(codigo);
-		if (unaCarrera != null) {
-			model.addAttribute("unaCarrera", unaCarrera);
+	@GetMapping("/modificar/{id}")
+	public String getModificarCarrera(@PathVariable("id") Long id, Model model) {
+		unaCarreraDTO = carreraService.getCarrera(id);
+		if (unaCarreraDTO != null) {
+			model.addAttribute("unaCarrera", unaCarreraDTO);
 			model.addAttribute("edicion", true);
 			return "formCarrera";
 		} else {
@@ -60,28 +57,15 @@ public class CarreraController {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarCarrera(@ModelAttribute("unaCarrera") Carrera carrera, Model model,
+	public String modificarCarrera(@ModelAttribute("unaCarrera") CarreraDTO carreraDTO, Model model,
 			RedirectAttributes redirectAttributes) {
-		if (CarreraList.updateCarrera(carrera)) {
-			String msg = "Se ha modificado la carrera '" + carrera.getNombre() + "' con éxito.";
-			redirectAttributes.addFlashAttribute("msgEdit", msg);
-		} else {
-			redirectAttributes.addFlashAttribute("msgErr", "Error al modificar la carrera (el Codigo '" + carrera.getCodigo() + "' ya existe).");
-		}
+		carreraService.editCarrera(carreraDTO);
 		return "redirect:/carreras/lista";
 	}
 
-	@GetMapping("/eliminar/{codigo}")
-	public String eliminarCarrera(@PathVariable("codigo") String codigo, RedirectAttributes redirectAttributes) {
-		Carrera carrera = CarreraList.findCarreraByCodigo(codigo);
-		if (carrera != null) {
-			String msg = "Se ha eliminado la carrera '" + carrera.getNombre() + "' con codigo '" + carrera.getCodigo() + "' con éxito.";
-			if (CarreraList.removeCarrera(carrera)) {
-				redirectAttributes.addFlashAttribute("msgRem", msg);
-			} else {
-				redirectAttributes.addFlashAttribute("msgErr", "Error al eliminar la carrera (la carrera no existe).");
-			}
-		}
+	@GetMapping("/eliminar/{id}")
+	public String eliminarCarrera(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+		carreraService.deleteCarrera(id);
 		return "redirect:/carreras/lista";
 	}
 

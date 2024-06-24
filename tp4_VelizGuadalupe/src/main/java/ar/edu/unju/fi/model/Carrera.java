@@ -2,54 +2,40 @@ package ar.edu.unju.fi.model;
 
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Component
+@Entity
+@Table(name = "Carreras")
 public class Carrera {
-	private String codigo;
-	private String nombre;
-	private int cantidadAnios;
-	private String estado;
-	
-	public Carrera(String codigo, String nombre, int cantidadAnios, String estado) {
-		super();
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.cantidadAnios = cantidadAnios;
-		this.estado = estado;
-	}
 
-	public Carrera() {
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public String getCodigo() {
-		return codigo;
-	}
+    @Column(name = "codigo", nullable = false, unique = true)
+    private String codigo;
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
 
-	public String getNombre() {
-		return nombre;
-	}
+    @Column(name = "cantidadAnios", nullable = false)
+    private int cantidadAnios;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public int getCantidadAnios() {
-		return cantidadAnios;
-	}
-
-	public void setCantidadAnios(int cantidadAnios) {
-		this.cantidadAnios = cantidadAnios;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	
+    @Column(name = "estado", nullable = false)
+    private String estado;
 }
+

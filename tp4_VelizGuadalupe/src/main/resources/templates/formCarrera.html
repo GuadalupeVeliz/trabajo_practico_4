@@ -20,6 +20,10 @@
 			<div class="mb-3">
 				<h3 th:text="${edicion ? 'Modificar Carrera' : 'Agregar Nueva Carrera'}"></h3>
 			</div>
+			
+			<div class="mb-3">
+				<input type="hidden" th:readonly="${id}" th:field="*{id}" required>
+			</div>
 			<div class="mb-3">
 				<label for="codigo" class="form-label">Codigo:</label>
 				<input type="text" th:readonly="${edicion}" th:class="'form-control '+${edicion ? 'opacity-50' : ''}"
