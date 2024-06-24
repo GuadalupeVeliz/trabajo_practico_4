@@ -50,10 +50,10 @@
 							<td th:text="${m.carrera.nombre}"></td>
 							<td class="text-center">
 								<a class="btn btn-sm btn-secondary mb-1 mb-xxl-0"
-									th:href="@{/materias/modificar/}+${m.codigo}">Modificar</a>
+									th:href="@{/materias/modificar/}+${m.id}">Modificar</a>
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-									th:data-bs-target="'#exampleModal'+${m.codigo}">
+									th:data-bs-target="'#exampleModal'+${m.id}">
 									Eliminar
 								</button>
 							</td>
@@ -64,7 +64,7 @@
 		</div>
 
 		<!-- Modal -->
-		<div class="modal fade" th:each="m : ${materias}" th:id="'exampleModal'+${m.codigo}" tabindex="-1"
+		<div class="modal fade" th:each="m : ${materias}" th:id="'exampleModal'+${m.id}" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -77,7 +77,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-						<a class="btn btn-danger" th:href="@{/materias/eliminar/}+${m.codigo}">Eliminar</a>
+						<a class="btn btn-danger" th:href="@{/materias/eliminar/}+${m.id}">Eliminar</a>
 					</div>
 				</div>
 			</div>

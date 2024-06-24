@@ -3,90 +3,54 @@ package ar.edu.unju.fi.model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "Materias")
 @Component
 public class Materia {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(name = "codigo",nullable = false,unique =true)
 	private String codigo;
+	
+	@Column(name="nombre",nullable=false)
 	private String nombre;
+	
+	@Column(name="curso",nullable=false)
 	private int curso;
+
+	@Column(name="cantidadHoras",nullable=false)
 	private int cantidadHoras;
+	
+	@Column(name="modalidad",nullable=false)
 	private Modalidad modalidad;
+	
+	@Column(name="docente",nullable=false)
 	@Autowired
 	private Docente docente;
+	
+	@Column(name="carrera",nullable=false)
 	@Autowired
 	private Carrera carrera;
+	
 	public enum Modalidad{
 		VIRTUAL,PRESENCIAL;
 	}
-
 	
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public int getCurso() {
-		return curso;
-	}
-
-	public void setCurso(int curso) {
-		this.curso = curso;
-	}
-
-	public int getCantidadHoras() {
-		return cantidadHoras;
-	}
-
-	public void setCantidadHoras(int cantidadHoras) {
-		this.cantidadHoras = cantidadHoras;
-	}
-
-	public Modalidad getModalidad() {
-		return modalidad;
-	}
-
-	public void setModalidad(Modalidad modalidad) {
-		this.modalidad = modalidad;
-	}
-
-	public Docente getDocente() {
-		return docente;
-	}
-
-	public void setDocente(Docente docente) {
-		this.docente = docente;
-	}
-
-	public Carrera getCarrera() {
-		return carrera;
-	}
-
-	public void setCarrera(Carrera carrera) {
-		this.carrera = carrera;
-	}
-
-	public Materia(String codigo, String nombre, int curso, int cantidadHoras, Modalidad modalidad, Docente docente,
-			Carrera carrera) {
-		super();
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.curso = curso;
-		this.cantidadHoras = cantidadHoras;
-		this.modalidad = modalidad;
-		this.docente = docente;
-		this.carrera = carrera;
-	}
-
-	public Materia() {
-	}
 }

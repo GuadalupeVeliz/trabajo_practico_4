@@ -12,19 +12,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.collections.CarreraList;
 import ar.edu.unju.fi.collections.DocenteList;
-import ar.edu.unju.fi.collections.MateriaList;
+import ar.edu.unju.fi.dto.MateriaDTO;
 import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.model.Docente;
-import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.model.Materia.Modalidad;
+import ar.edu.unju.fi.service.MateriaService;
 
 @Controller
 @RequestMapping("/materias")
 public class MateriaController {
 
 	@Autowired
-	private Materia unaMateria;
+	private MateriaService materiaService;
+	
+	private MateriaDTO unaMateriaDTO;
 
+	
 	@Autowired
 	private Docente unDocente;
 
@@ -33,14 +36,14 @@ public class MateriaController {
 
 	@GetMapping("/lista")
 	public String getListaMateria(Model model) {
-		model.addAttribute("materias", MateriaList.getListaMateria());
+		model.addAttribute("materias", materiaService.getMaterias());
 		return "listaMaterias";
 	}
 
 	@GetMapping("/nuevo")
 	public String getNuevaMateria(Model model) {
-		unaMateria = new Materia();
-		model.addAttribute("unaMateria", unaMateria);
+		unaMateriaDTO = new MateriaDTO();
+		model.addAttribute("unaMateria", unaMateriaDTO);
 		model.addAttribute("modalidades", Modalidad.values());
 		model.addAttribute("docentes", DocenteList.getListaDocentes());
 		model.addAttribute("carreras", CarreraList.getListaCarreras());
@@ -49,27 +52,21 @@ public class MateriaController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardarMateria(@ModelAttribute("unaMateria") Materia materia, Model model,
+	public String guardarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, Model model,
 			RedirectAttributes redirectAttributes) {
-		unDocente = DocenteList.findDocenteByLegajo(materia.getDocente().getLegajo());
-		unaCarrera = CarreraList.findCarreraByCodigo(materia.getCarrera().getCodigo());
-		materia.setDocente(unDocente);
-		materia.setCarrera(unaCarrera);
-		if (MateriaList.addMateria(materia)) {
-			String msg = "Se ha agregado la materia '" + materia.getNombre() + "' a la carrera '" + unaCarrera.getNombre()
-					+ "' con éxito.";
-			redirectAttributes.addFlashAttribute("msgAdd", msg);
-		} else {
-			redirectAttributes.addFlashAttribute("msgErr", "Error al agregar materia (el Codigo '" + materia.getCodigo() + "' ya existe).");
-		}
+		unDocente = DocenteList.findDocenteByLegajo(materiaDTO.getDocente().getLegajo());
+		unaCarrera = CarreraList.findCarreraByCodigo(materiaDTO.getCarrera().getCodigo());
+		materiaDTO.setDocente(unDocente);
+		materiaDTO.setCarrera(unaCarrera);
+		materiaService.saveMateria(unaMateriaDTO);
 		return "redirect:/materias/lista";
 	}
 
-	@GetMapping("/modificar/{codigo}")
-	public String getModificarMateria(@PathVariable("codigo") String codigo, Model model) {
-		unaMateria = MateriaList.findMateriaByCodigo(codigo);
-		if (unaMateria != null) {
-			model.addAttribute("unaMateria", unaMateria);
+	@GetMapping("/modificar/{id}")
+	public String getModificarMateria(@PathVariable("id") Long id, Model model) {
+		unaMateriaDTO = materiaService.getMateria(id);
+		if (unaMateriaDTO != null) {
+			model.addAttribute("unaMateria", unaMateriaDTO);
 			model.addAttribute("modalidades", Modalidad.values());
 			model.addAttribute("docentes", DocenteList.getListaDocentes());
 			model.addAttribute("carreras", CarreraList.getListaCarreras());
@@ -81,33 +78,19 @@ public class MateriaController {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarMateria(@ModelAttribute("unaMateria") Materia materia, Model model,
+	public String modificarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, Model model,
 			RedirectAttributes redirectAttributes) {
-		unDocente = DocenteList.findDocenteByLegajo(materia.getDocente().getLegajo());
-		unaCarrera = CarreraList.findCarreraByCodigo(materia.getCarrera().getCodigo());
-		materia.setDocente(unDocente);
-		materia.setCarrera(unaCarrera);
-		if (MateriaList.updateMateria(materia)) {
-			String msg = "Se ha modificado la materia '" + materia.getNombre() + "' con éxito.";
-			redirectAttributes.addFlashAttribute("msgEdit", msg);
-		} else {
-			redirectAttributes.addFlashAttribute("msgErr", "Error al modificar materia (el Codigo '" + materia.getCodigo() + "' ya existe).");
-		}
+		unDocente = DocenteList.findDocenteByLegajo(materiaDTO.getDocente().getLegajo());
+		unaCarrera = CarreraList.findCarreraByCodigo(materiaDTO.getCarrera().getCodigo());
+		materiaDTO.setDocente(unDocente);
+		materiaDTO.setCarrera(unaCarrera);
+		materiaService.editMateria(materiaDTO);
 		return "redirect:/materias/lista";
 	}
 
-	@GetMapping("/eliminar/{codigo}")
-	public String eliminarMateria(@PathVariable("codigo") String codigo, RedirectAttributes redirectAttributes) {
-		Materia materia = MateriaList.findMateriaByCodigo(codigo);
-		if (materia != null) {
-			String msg = "Se ha eliminado la materia '" + materia.getNombre() + "' con codigo '" + materia.getCodigo()
-					+ "' de la carrera '" + materia.getCarrera().getNombre() + "' con éxito.";
-			if (MateriaList.removeMateria(materia)) {
-				redirectAttributes.addFlashAttribute("msgRem", msg);	
-			} else {
-				redirectAttributes.addFlashAttribute("msgErr", "Error al eliminar materia (la materia no existe).");
-			}
-		}
+	@GetMapping("/eliminar/{id}")
+	public String eliminarMateria(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+		materiaService.deleteMateria(id);
 		return "redirect:/materias/lista";
 	}
 

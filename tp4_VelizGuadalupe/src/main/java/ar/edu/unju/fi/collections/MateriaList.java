@@ -12,6 +12,7 @@ public class MateriaList {
 
 	private static ArrayList<Materia> lista = new ArrayList<>();
 
+	/*
 	public static ArrayList<Materia> getListaMateria() {
 		if (lista.isEmpty()) {
 			Docente brizuela = DocenteList.getListaDocentes().get(0);
@@ -42,7 +43,7 @@ public class MateriaList {
 
 		}
 		return lista;
-	}
+	}*/
 
 	public static Materia findMateriaByCodigo(String codigo) {
 		for (Materia materia : lista) {
