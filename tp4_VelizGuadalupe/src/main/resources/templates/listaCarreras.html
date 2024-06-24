@@ -44,10 +44,10 @@
 							<td th:text="${c.estado}" class="text-center"></td>
 							<td class="text-center">
 								<a class="btn btn-sm btn-secondary mb-1 mb-md-0"
-									th:href="@{/carreras/modificar/}+${c.codigo}">Modificar</a>
+									th:href="@{/carreras/modificar/}+${c.id}">Modificar</a>
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-									th:data-bs-target="'#exampleModal'+${c.codigo}">
+									th:data-bs-target="'#exampleModal'+${c.id}">
 									Eliminar
 								</button>
 							</td>
@@ -58,7 +58,7 @@
 		</div>
 
 		<!-- Modal -->
-		<div class="modal fade" th:each="c : ${carreras}" th:id="'exampleModal'+${c.codigo}" tabindex="-1"
+		<div class="modal fade" th:each="c : ${carreras}" th:id="'exampleModal'+${c.id}" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -71,7 +71,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-						<a class="btn btn-danger" th:href="@{/carreras/eliminar/}+${c.codigo}">Eliminar</a>
+						<a class="btn btn-danger" th:href="@{/carreras/eliminar/}+${c.id}">Eliminar</a>
 					</div>
 				</div>
 			</div>

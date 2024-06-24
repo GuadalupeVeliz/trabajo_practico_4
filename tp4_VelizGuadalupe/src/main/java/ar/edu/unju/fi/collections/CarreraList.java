@@ -9,7 +9,7 @@ public class CarreraList {
 
 	private static ArrayList<Carrera> lista = new ArrayList<>();
 	
-	public static ArrayList<Carrera> getListaCarreras() {
+	/*public static ArrayList<Carrera> getListaCarreras() {
 		if (lista.isEmpty()) {
 			lista.add(new Carrera("INF", "Ingeniería Informática", 5, "Activa"));
 			lista.add(new Carrera("APU", "Analista Programador Universitario", 3, "Activa"));
@@ -24,7 +24,7 @@ public class CarreraList {
 			lista.add(new Carrera("ING", "Ingeniería Civil", 5, "Activa"));
 		}
 		return lista;
-	}
+	}*/
 	
 	public static Carrera findCarreraByCodigo(String codigo) {
 		for (Carrera carrera : lista) {
