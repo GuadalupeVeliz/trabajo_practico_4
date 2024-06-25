@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ar.edu.unju.fi.dto.DocenteDto;
+import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.service.DocenteService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,44 +17,39 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequestMapping("/docentes")
 public class DocenteController {
-
-	@Autowired
-	private static DocenteDto unDocente;
 	
 	@Autowired
 	private DocenteService docenteService; 
+	
+	private DocenteDTO unDocenteDTO;
 
 	@GetMapping("/lista")
 	public String getListaDocente(Model model) {
-		model.addAttribute("docentes", docenteService.getListaDocentes());
+		model.addAttribute("docentes", docenteService.getDocentes());
 		return "listaDocentes";
 	}
 
 	@GetMapping("/nuevo")
 	public String getNuevoDocente(Model model) {
-		unDocente = new DocenteDto();
-		model.addAttribute("unDocente", unDocente);
+		DocenteDTO unDocenteDTO = new DocenteDTO();
+		model.addAttribute("unDocente", unDocenteDTO);
 		model.addAttribute("edicion", false);
 		return "formDocente";
 	}
 
 	@PostMapping("/guardar")
-	public String guardarDocente(@ModelAttribute("unDocente") DocenteDto docenteDto, Model model,
+	public String guardarDocente(@ModelAttribute("unDocente") DocenteDTO docenteDTO, Model model,
 			RedirectAttributes redirectAttributes) {
-		if (docenteService.addDocente(docenteDto)) {
-			String msg = "Se agregó al docente " + docenteDto.getNombre() + " " + docenteDto.getApellido() + " con éxito.";
-			redirectAttributes.addFlashAttribute("msgAdd", msg);
-		} else {
-			redirectAttributes.addFlashAttribute("msgErr", "Error al agregar docente (el Legajo '" + docenteDto.getLegajo() + "' ya existe).");
-		}
+		
+		docenteService.saveDocente(docenteDTO);
 		return "redirect:/docentes/lista";
 	}
 
-	@GetMapping("/modificar/{legajo}")
-	public String getModificarDocente(@PathVariable("legajo") String legajo, Model model) {
-		unDocente = docenteService.findDocenteByLegajo(legajo);
-		if (unDocente != null) {
-			model.addAttribute("unDocente", unDocente);
+	@GetMapping("/modificar/{id}")
+	public String getModificarDocente(@PathVariable("id") Long id, Model model) {
+		unDocenteDTO = docenteService.getDocente(id);
+		if (unDocenteDTO != null) {
+			model.addAttribute("unDocente", unDocenteDTO);
 			model.addAttribute("edicion", true);
 			return "formDocente";
 		} else {
@@ -63,27 +58,16 @@ public class DocenteController {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarDocente(@ModelAttribute("unDocente") DocenteDto docenteDto, Model model, RedirectAttributes redirectAttributes) {
-		if (docenteService.updateDocente(docenteDto)) {
-			String msg = "Se modificó al docente " + docenteDto.getNombre() + " " + docenteDto.getApellido() + " con éxito.";
-			redirectAttributes.addFlashAttribute("msgEdit", msg);
-		} else {
-			redirectAttributes.addFlashAttribute("msgErr", "Error al modificar docente (el Legajo '" + docenteDto.getLegajo() + "' ya existe).");
-		}
+	public String modificarDocente(@ModelAttribute("unDocente") DocenteDTO docenteDTO, Model model, RedirectAttributes redirectAttributes) {
+		
+		docenteService.editDocente(docenteDTO);
 		return "redirect:/docentes/lista";
 	}
 
-	@GetMapping("/eliminar/{legajo}")
-	public String eliminarDocente(@PathVariable("legajo") String legajo, RedirectAttributes redirectAttributes) {
-		DocenteDto docenteDto = docenteService.findDocenteByLegajo(legajo);
-		if (docenteDto != null) {
-			String msg = "Se eliminó al docente " + docenteDto.getNombre() + " " + docenteDto.getApellido() + " con éxito.";
-			if (docenteService.removeDocente(docenteDto.getLegajo())) {
-				redirectAttributes.addFlashAttribute("msgRem", msg);				
-			} else {
-				redirectAttributes.addFlashAttribute("msgErr", "Error al eliminar docente (el docente no exite).");
-			}
-		}
+	@GetMapping("/eliminar/{id}")
+	public String eliminarDocente(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+		
+		docenteService.deleteDocente(id);
 		return "redirect:/docentes/lista";
 	}
 

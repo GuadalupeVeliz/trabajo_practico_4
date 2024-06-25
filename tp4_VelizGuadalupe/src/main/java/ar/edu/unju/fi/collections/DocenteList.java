@@ -8,6 +8,8 @@ import ar.edu.unju.fi.model.Docente;
 public class DocenteList {
 
 	private static ArrayList<Docente> lista = new ArrayList<>();
+	
+	/*
 
 	public static ArrayList<Docente> getListaDocentes() {
 		if (lista.isEmpty()) {
@@ -37,7 +39,8 @@ public class DocenteList {
 		}
 		return lista;
 	}
-
+	*/
+	
 	public static Docente findDocenteByLegajo(String legajo) {
 		for (Docente docente : lista) {
 			if (docente.getLegajo().equals(legajo)) {
