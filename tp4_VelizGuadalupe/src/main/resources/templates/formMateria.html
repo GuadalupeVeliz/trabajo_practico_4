@@ -20,6 +20,10 @@
 			<div class="mb-3">
 				<h3 th:text="${edicion ? 'Modificar Materia' : 'Agregar Nueva Materia'}"></h3>
 			</div>
+			
+			<div class="mb-3">
+				<input type="hidden" th:readonly="${id}" th:field="*{id}" required>
+			</div>
 			<div class="mb-3">
 				<label for="codigo" class="form-label">Codigo:</label>
 				<input type="text" th:readonly="${edicion}" th:class="'form-control '+${edicion ? 'opacity-50' : ''}"
@@ -47,8 +51,8 @@
 			</div>
 			<div class="mb-3">
 				<label for="docente" class="form-label">Docente a cargo:</label>
-				<select type="text" class="form-control" id="docente" th:field="*{docente.legajo}" required>
-					<option th:each="d : ${docentes}" th:value="${d.legajo}" th:text="${d.nombre}+' '+${d.apellido}">
+				<select type="text" class="form-control" id="docente" th:field="*{docente.id}" required>
+					<option th:each="d : ${docentes}" th:value="${d.id}" th:text="${d.nombre}+' '+${d.apellido}">
 					</option>
 				</select>
 			</div>
