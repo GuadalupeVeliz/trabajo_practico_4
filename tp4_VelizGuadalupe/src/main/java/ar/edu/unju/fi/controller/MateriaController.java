@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ar.edu.unju.fi.collections.CarreraList;
-import ar.edu.unju.fi.collections.DocenteList;
+import ar.edu.unju.fi.dto.CarreraDTO;
+import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.dto.MateriaDTO;
-import ar.edu.unju.fi.model.Carrera;
-import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.model.Materia.Modalidad;
+import ar.edu.unju.fi.service.CarreraService;
+import ar.edu.unju.fi.service.DocenteService;
 import ar.edu.unju.fi.service.MateriaService;
 
 @Controller
@@ -25,14 +25,15 @@ public class MateriaController {
 	@Autowired
 	private MateriaService materiaService;
 	
-	private MateriaDTO unaMateriaDTO;
-
+	@Autowired
+	private DocenteService docenteService;
 	
 	@Autowired
-	private Docente unDocente;
-
-	@Autowired
-	private Carrera unaCarrera;
+	private CarreraService carreraService;
+	
+	private MateriaDTO unaMateriaDTO;
+	private DocenteDTO unDocenteDTO;
+	private CarreraDTO unaCarreraDTO;
 
 	@GetMapping("/lista")
 	public String getListaMateria(Model model) {
@@ -45,8 +46,8 @@ public class MateriaController {
 		unaMateriaDTO = new MateriaDTO();
 		model.addAttribute("unaMateria", unaMateriaDTO);
 		model.addAttribute("modalidades", Modalidad.values());
-		model.addAttribute("docentes", DocenteList.getListaDocentes());
-		model.addAttribute("carreras", CarreraList.getListaCarreras());
+		model.addAttribute("docentes", docenteService.getDocentes());
+		model.addAttribute("carreras", carreraService.getCarreras());
 		model.addAttribute("edicion", false);
 		return "formMateria";
 	}
@@ -54,10 +55,8 @@ public class MateriaController {
 	@PostMapping("/guardar")
 	public String guardarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, Model model,
 			RedirectAttributes redirectAttributes) {
-		unDocente = DocenteList.findDocenteByLegajo(materiaDTO.getDocente().getLegajo());
-		unaCarrera = CarreraList.findCarreraByCodigo(materiaDTO.getCarrera().getCodigo());
-		materiaDTO.setDocente(unDocente);
-		materiaDTO.setCarrera(unaCarrera);
+		unDocenteDTO = docenteService.getDocente(materiaDTO.getDocente().getId());
+		unaCarreraDTO = carreraService.getCarrera(materiaDTO.getCarrera().getId());
 		materiaService.saveMateria(unaMateriaDTO);
 		return "redirect:/materias/lista";
 	}
@@ -68,8 +67,8 @@ public class MateriaController {
 		if (unaMateriaDTO != null) {
 			model.addAttribute("unaMateria", unaMateriaDTO);
 			model.addAttribute("modalidades", Modalidad.values());
-			model.addAttribute("docentes", DocenteList.getListaDocentes());
-			model.addAttribute("carreras", CarreraList.getListaCarreras());
+			model.addAttribute("docentes", docenteService.getDocentes());
+			model.addAttribute("carreras", carreraService.getCarreras());
 			model.addAttribute("edicion", true);
 			return "formMateria";
 		} else {
@@ -80,10 +79,6 @@ public class MateriaController {
 	@PostMapping("/modificar")
 	public String modificarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, Model model,
 			RedirectAttributes redirectAttributes) {
-		unDocente = DocenteList.findDocenteByLegajo(materiaDTO.getDocente().getLegajo());
-		unaCarrera = CarreraList.findCarreraByCodigo(materiaDTO.getCarrera().getCodigo());
-		materiaDTO.setDocente(unDocente);
-		materiaDTO.setCarrera(unaCarrera);
 		materiaService.editMateria(materiaDTO);
 		return "redirect:/materias/lista";
 	}
