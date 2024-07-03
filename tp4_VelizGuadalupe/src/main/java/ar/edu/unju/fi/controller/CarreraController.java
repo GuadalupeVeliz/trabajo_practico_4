@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.dto.CarreraDTO;
+import ar.edu.unju.fi.dto.CarreraDTO.Estado;
+import ar.edu.unju.fi.model.Materia.Modalidad;
 import ar.edu.unju.fi.service.CarreraService;
 
 @Controller
@@ -32,6 +34,7 @@ public class CarreraController {
 	public String getNuevoCarrera(Model model) {
 		CarreraDTO unaCarreraDTO = new CarreraDTO();
 		model.addAttribute("unaCarrera", unaCarreraDTO);
+		model.addAttribute("estados", Estado.values());
 		model.addAttribute("edicion", false);
 		return "formCarrera";
 	}
@@ -49,6 +52,7 @@ public class CarreraController {
 		unaCarreraDTO = carreraService.getCarrera(id);
 		if (unaCarreraDTO != null) {
 			model.addAttribute("unaCarrera", unaCarreraDTO);
+			model.addAttribute("estados", Estado.values());
 			model.addAttribute("edicion", true);
 			return "formCarrera";
 		} else {

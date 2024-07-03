@@ -15,6 +15,10 @@ public class CarreraDTO {
 	private String codigo;
 	private String nombre;
 	private int cantidadAnios;
-	private String estado;
+	private Estado estado;
+	
+	public enum Estado {
+		ACTIVO, INACTIVO;
+	}
 
 }

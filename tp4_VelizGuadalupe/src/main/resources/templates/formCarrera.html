@@ -37,9 +37,12 @@
 				<label for="cantidadAnios" class="form-label">Cantidad de Años:</label>
 				<input type="number" class="form-control" id="cantidadAnios" th:field="*{cantidadAnios}" required>
 			</div>
-			<div class="mb-4">
+			<div class="mb-3">
 				<label for="estado" class="form-label">Estado:</label>
-				<input type="text" class="form-control" id="estado" th:field="*{estado}" required>
+				<select type="text" class="form-control" id="estado" th:field="*{estado}" required>
+				<option th:each="m : ${estados}" th:value="${m}"
+						th:text="${m.toString()}"></option>
+				</select>
 			</div>
 			<div class="mb-3 d-flex">
 				<input type="submit" class="btn btn-light px-3"

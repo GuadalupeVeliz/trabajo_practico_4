@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.model;
 
+import ar.edu.unju.fi.dto.CarreraDTO;
+
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -41,7 +43,7 @@ public class Carrera {
     private int cantidadAnios;
 
     @Column(name = "estado", nullable = false)
-    private String estado;
+    private CarreraDTO.Estado estado;
     
     @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Materia> materias;
