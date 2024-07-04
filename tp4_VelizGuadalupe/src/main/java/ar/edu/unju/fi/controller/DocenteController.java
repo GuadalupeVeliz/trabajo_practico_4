@@ -26,7 +26,7 @@ public class DocenteController {
 	@GetMapping("/lista")
 	public String getListaDocente(Model model) {
 		model.addAttribute("docentes", docenteService.getDocentes());
-		return "listaDocentes";
+		return "docentes/listaDocentes";
 	}
 
 	@GetMapping("/nuevo")
@@ -34,7 +34,7 @@ public class DocenteController {
 		DocenteDTO unDocenteDTO = new DocenteDTO();
 		model.addAttribute("unDocente", unDocenteDTO);
 		model.addAttribute("edicion", false);
-		return "formDocente";
+		return "docentes/formDocente";
 	}
 
 	@PostMapping("/guardar")
@@ -51,7 +51,7 @@ public class DocenteController {
 		if (unDocenteDTO != null) {
 			model.addAttribute("unDocente", unDocenteDTO);
 			model.addAttribute("edicion", true);
-			return "formDocente";
+			return "docentes/formDocente";
 		} else {
 			return "redirect:/docentes/lista";
 		}

@@ -25,42 +25,25 @@
 			<div th:if="${msgEdit}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
 			<div th:if="${msgRem}" th:text="${msgRem}" class="alert alert-danger" role="alert"></div>
 			<div th:if="${msgErr}" th:text="${msgErr}" class="alert alert-danger" role="alert"></div>
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped align-middle m-0">
-					<thead class="table-dark">
-						<tr class="text-center">
-							<th scope="col">Legajo</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Apellido</th>
-							<th scope="col">Email</th>
-							<th scope="col">Telefono</th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody class="table-group-divider">
-						<tr class="" th:each="d : ${docentes}">
-							<td th:text="${d.legajo}"></td>
-							<td th:text="${d.nombre}"></td>
-							<td th:text="${d.apellido}"></td>
-							<td th:text="${d.email}"></td>
-							<td th:text="${d.telefono}"></td>
-							<td class="text-center">
-								<a class="btn btn-sm btn-secondary mb-1 mb-xxl-0"
-									th:href="@{/docentes/modificar/}+${d.legajo}">Modificar</a>
-								<!-- Button trigger modal -->
-								<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-									th:data-bs-target="'#exampleModal'+${d.legajo}">
-									Eliminar
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="row px-3">
+				<div class="col-12 col-lg-4 col-xl-3 p-3" th:each="d : ${docentes}">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title mb-3" th:text="${d.nombre} + ' ' + ${d.apellido}"></h5>
+							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${d.email}"></h6>
+							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="'Legajo: ' + ${d.legajo}"></h6>
+							<a th:href="@{/docentes/modificar/} + ${d.id}"
+								class="card-link btn btn-sm btn-primary">Modificar</a>
+							<a href="#" class="card-link btn btn-sm btn-danger" data-bs-toggle="modal"
+								th:data-bs-target="'#exampleModal'+${d.id}">Eliminar</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<!-- Modal -->
-		<div class="modal fade" th:each="d : ${docentes}" th:id="'exampleModal'+${d.legajo}" tabindex="-1"
+		<div class="modal fade" th:each="d : ${docentes}" th:id="'exampleModal'+${d.id}" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -69,11 +52,12 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						Desea eliminar al docente <span	th:text="${d.nombre}+' '+${d.apellido}+' con legajo: '+${d.legajo}"></span>?
+						Desea eliminar al docente <span
+							th:text="${d.nombre}+' '+${d.apellido}+' con legajo: '+${d.legajo}"></span>?
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-						<a class="btn btn-danger" th:href="@{/docentes/eliminar/}+${d.legajo}">Eliminar</a>
+						<a class="btn btn-danger" th:href="@{/docentes/eliminar/}+${d.id}">Eliminar</a>
 					</div>
 				</div>
 			</div>
