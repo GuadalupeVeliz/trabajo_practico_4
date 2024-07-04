@@ -38,7 +38,7 @@ public class MateriaController {
 	@GetMapping("/lista")
 	public String getListaMateria(Model model) {
 		model.addAttribute("materias", materiaService.getMaterias());
-		return "listaMaterias";
+		return "materias/listaMaterias";
 	}
 
 	@GetMapping("/nuevo")
@@ -49,7 +49,7 @@ public class MateriaController {
 		model.addAttribute("docentes", docenteService.getDocentes());
 		model.addAttribute("carreras", carreraService.getCarreras());
 		model.addAttribute("edicion", false);
-		return "formMateria";
+		return "materias/formMateria";
 	}
 
 	@PostMapping("/guardar")
@@ -70,7 +70,7 @@ public class MateriaController {
 			model.addAttribute("docentes", docenteService.getDocentes());
 			model.addAttribute("carreras", carreraService.getCarreras());
 			model.addAttribute("edicion", true);
-			return "formMateria";
+			return "materias/formMateria";
 		} else {
 			return "redirect:/materias/lista";
 		}

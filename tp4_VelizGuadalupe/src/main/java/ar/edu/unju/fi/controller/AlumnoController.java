@@ -26,7 +26,7 @@ public class AlumnoController {
 	@GetMapping("/lista")
 	public String getListaAlumno(Model model) {
 		model.addAttribute("alumnos", alumnoService.getAlumnos());
-		return "listaAlumnos";
+		return "alumnos/listaAlumnos";
 	}
 
 	@GetMapping("/nuevo")
@@ -34,7 +34,7 @@ public class AlumnoController {
 		AlumnoDTO unAlumnoDTO = new AlumnoDTO();
 		model.addAttribute("unAlumno", unAlumnoDTO);
 		model.addAttribute("edicion", false);
-		return "formAlumno";
+		return "alumnos/formAlumno";
 	}
 
 	@PostMapping("/guardar")
@@ -51,7 +51,7 @@ public class AlumnoController {
 		if (unAlumnoDTO != null) {
 			model.addAttribute("unAlumno", unAlumnoDTO);
 			model.addAttribute("edicion", true);
-			return "formAlumno";
+			return "alumnos/formAlumno";
 		} else {
 			return "redirect:/alumnos/lista";
 		}

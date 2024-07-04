@@ -25,41 +25,24 @@
 			<div th:if="${msgEdit}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
 			<div th:if="${msgRem}" th:text="${msgRem}" class="alert alert-danger" role="alert"></div>
 			<div th:if="${msgErr}" th:text="${msgErr}" class="alert alert-danger" role="alert"></div>
-			<div class="table-responsive">
-				<table class="table table-bordered table-striped align-middle m-0">
-					<thead class="table-dark">
-						<tr class="text-center">
-							<th scope="col">Codigo</th>
-							<th scope="col">Nombre</th>
-							<th scope="col">Curso</th>
-							<th scope="col">Cant. de horas</th>
-							<th scope="col">Modalidad</th>
-							<th scope="col">Docente</th>
-							<th scope="col">Carrera</th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody class="table-group-divider">
-						<tr class="text-center" th:each="m : ${materias}">
-							<td th:text="${m.codigo}"></td>
-							<td th:text="${m.nombre}" class="text-start"></td>
-							<td th:text="${m.curso}+'° año'"></td>
-							<td th:text="${m.cantidadHoras}+' horas.'"></td>
-							<td th:text="${m.modalidad}"></td>
-							<td th:text="${m.docente.nombre}+' '+${m.docente.apellido}" class="text-start"></td>
-							<td th:text="${m.carrera.nombre}"></td>
-							<td class="text-center">
-								<a class="btn btn-sm btn-secondary mb-1 mb-xxl-0"
-									th:href="@{/materias/modificar/}+${m.id}">Modificar</a>
-								<!-- Button trigger modal -->
-								<button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-									th:data-bs-target="'#exampleModal'+${m.id}">
-									Eliminar
-								</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="row px-3">
+				<div class="col-12 col-lg-4 col-xl-3 p-3" th:each="m : ${materias}">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title mb-3" th:text="${m.nombre}"></h5>
+							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${m.carrera.nombre}"></h6>
+							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${m.curso} + '° Año'"></h6>
+							<h6 class="card-subtitle mb-2 text-body-secondary"
+								th:text="'Docente a cargo: ' + ${m.docente.nombre} + ' ' + ${m.docente.apellido}"></h6>
+							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="'Modalidad: ' + ${m.modalidad.toString()}"></h6>
+							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="'Cantidad de horas: ' + ${m.cantidadHoras}"></h6>
+							<a th:href="@{/materias/modificar/} + ${m.id}"
+								class="card-link btn btn-sm btn-primary">Modificar</a>
+							<a href="#" class="card-link btn btn-sm btn-danger" data-bs-toggle="modal"
+								th:data-bs-target="'#exampleModal'+${m.id}">Eliminar</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
