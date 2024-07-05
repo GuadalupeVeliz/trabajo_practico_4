@@ -1,11 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Agregar una Materia</title>
-	<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
-	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agregar una Materia</title>
+<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
+<link th:rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
 
 <body>
@@ -13,54 +14,84 @@
 	<nav th:replace="~{/layouts/header :: header}"></nav>
 
 	<main class="container bg-fondo pt-3 pb-5">
-		<form class="form m-auto bg-primario py-3 px-4 border-radius-5 color-white"
-			th:action="${edicion} ? @{/materias/modificar} : @{/materias/guardar}" th:object="${unaMateria}"
-			method="post" enctype="multipart/form-data">
+		<form
+			class="form m-auto bg-primario py-3 px-4 border-radius-5 color-white"
+			th:action="${edicion} ? @{/materias/modificar} : @{/materias/guardar}"
+			th:object="${unaMateria}" method="post" enctype="multipart/form-data">
 
 			<div class="mb-3">
-				<h3 th:text="${edicion ? 'Modificar Materia' : 'Agregar Nueva Materia'}"></h3>
+				<h3
+					th:text="${edicion ? 'Modificar Materia' : 'Agregar Nueva Materia'}"></h3>
 			</div>
-			
+
 			<div class="mb-3">
 				<input type="hidden" th:readonly="${id}" th:field="*{id}" required>
 			</div>
 			<div class="mb-3">
-				<label for="codigo" class="form-label">Codigo:</label>
-				<input type="text" th:readonly="${edicion}" th:class="'form-control '+${edicion ? 'opacity-50' : ''}"
-					id="codigo" th:field="*{codigo}" required>
+				<label for="codigo" class="form-label">Codigo:</label> <input
+					type="text" th:readonly="${edicion}"
+					th:class="'form-control '+${edicion ? 'opacity-50' : ''}"
+					id="codigo" th:field="*{codigo}"
+					th:classappend="${#fields.hasErrors('codigo')} ? 'is-invalid' : ''">
+				<p class="form-text text-danger"
+					th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></p>
 			</div>
 			<div class="mb-3">
-				<label for="nombre" class="form-label">Nombre:</label>
-				<input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+				<label for="nombre" class="form-label">Nombre:</label> <input
+					type="text" class="form-control" id="nombre" th:field="*{nombre}"
+					th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
+				<p class="form-text text-danger"
+					th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
 			</div>
 			<div class="mb-3">
-				<label for="curso" class="form-label">Año de curso:</label>
-				<input type="number" class="form-control" min="1" max="7" id="curso" th:field="*{curso}" required>
+				<label for="curso" class="form-label">Año de curso:</label> <input
+					type="number" class="form-control" min="1" max="7" id="curso"
+					th:field="*{curso}"
+					th:classappend="${#fields.hasErrors('curso')} ? 'is-invalid' : ''">
+				<p class="form-text text-danger"
+					th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></p>
 			</div>
 			<div class="mb-3">
-				<label for="cantidadHoras" class="form-label">Cantidad de Horas:</label>
-				<input type="number" class="form-control" min="1" max="120" id="cantidadHoras" th:field="*{cantidadHoras}"
-					required>
+				<label for="cantidadHoras" class="form-label">Cantidad de
+					Horas:</label> <input type="number" class="form-control" min="1" max="120"
+					id="cantidadHoras" th:field="*{cantidadHoras}"
+					th:classappend="${#fields.hasErrors('cantidadHoras')} ? 'is-invalid' : ''">
+				<p class="form-text text-danger"
+					th:if="${#fields.hasErrors('cantidadHoras')}"
+					th:errors="*{cantidadHoras}"></p>
 			</div>
 			<div class="mb-3">
-				<label for="modalidad" class="form-label">Modalidad:</label>
-				<select type="text" class="form-control" id="modalidad" th:field="*{modalidad}" required>
+				<label for="modalidad" class="form-label">Modalidad:</label> <select
+					type="text" class="form-control" id="modalidad"
+					th:field="*{modalidad}"
+					th:classappend="${#fields.hasErrors('modalidad')} ? 'is-invalid' : ''">
 					<option th:each="m : ${modalidades}" th:value="${m}"
 						th:text="${m.toString()}"></option>
 				</select>
+				<p class="form-text text-danger"
+					th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></p>
 			</div>
 			<div class="mb-3">
-				<label for="docente" class="form-label">Docente a cargo:</label>
-				<select type="text" class="form-control" id="docente" th:field="*{docente.id}" required>
-					<option th:each="d : ${docentes}" th:value="${d.id}" th:text="${d.nombre}+' '+${d.apellido}">
-					</option>
+				<label for="docente" class="form-label">Docente a cargo:</label> <select
+					type="text" class="form-control" id="docente"
+					th:field="*{docente.id}"
+					th:classappend="${#fields.hasErrors('docente')} ? 'is-invalid' : ''">
+					<option th:each="d : ${docentes}" th:value="${d.id}"
+						th:text="${d.nombre}+' '+${d.apellido}"></option>
 				</select>
+				<p class="text-danger" th:if="${#fields.hasErrors('docente')}"
+					th:errors="*{docente}"></p>
 			</div>
 			<div class="mb-4">
-				<label for="carrera" class="form-label">Carrera:</label>
-				<select type="text" class="form-control" id="carrera" th:field="*{carrera.codigo}" required>
-					<option th:each="c : ${carreras}" th:value="${c.codigo}" th:text="${c.nombre}"></option>
+				<label for="carrera" class="form-label">Carrera:</label> <select
+					type="text" class="form-control" id="carrera"
+					th:field="*{carrera.codigo}"
+					th:classappend="${#fields.hasErrors('carrera')} ? 'is-invalid' : ''">
+					<option th:each="c : ${carreras}" th:value="${c.codigo}"
+						th:text="${c.nombre}"></option>
 				</select>
+				<p class="text-danger" th:if="${#fields.hasErrors('carrera')}"
+					th:errors="*{carrera}"></p>
 			</div>
 			<div class="mb-3 d-flex">
 				<input type="submit" class="btn btn-light px-3"
@@ -72,7 +103,8 @@
 
 	<footer th:replace="~{/layouts/footer :: footer}"></footer>
 
-	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 
 </html>

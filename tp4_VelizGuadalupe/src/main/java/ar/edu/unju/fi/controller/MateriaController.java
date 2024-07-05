@@ -3,6 +3,7 @@ package ar.edu.unju.fi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import ar.edu.unju.fi.model.Materia.Modalidad;
 import ar.edu.unju.fi.service.CarreraService;
 import ar.edu.unju.fi.service.DocenteService;
 import ar.edu.unju.fi.service.MateriaService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/materias")
@@ -24,13 +26,13 @@ public class MateriaController {
 
 	@Autowired
 	private MateriaService materiaService;
-	
+
 	@Autowired
 	private DocenteService docenteService;
-	
+
 	@Autowired
 	private CarreraService carreraService;
-	
+
 	private MateriaDTO unaMateriaDTO;
 	private DocenteDTO unDocenteDTO;
 	private CarreraDTO unaCarreraDTO;
@@ -53,8 +55,13 @@ public class MateriaController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, Model model,
+	public String guardarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			model.addAttribute("unaMateria", materiaDTO);
+			model.addAttribute("edicion", false);
+			return "materias/formMateria";
+		}
 		unDocenteDTO = docenteService.getDocente(materiaDTO.getDocenteDTO().getId());
 		unaCarreraDTO = carreraService.getCarrera(materiaDTO.getCarreraDTO().getId());
 		materiaService.saveMateria(unaMateriaDTO);
@@ -77,8 +84,13 @@ public class MateriaController {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, Model model,
-			RedirectAttributes redirectAttributes) {
+	public String modificarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, BindingResult result,
+			Model model, RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			model.addAttribute("unaMateria", materiaDTO);
+			model.addAttribute("edicion", true);
+			return "materias/formMateria";
+		}
 		materiaService.editMateria(materiaDTO);
 		return "redirect:/materias/lista";
 	}
