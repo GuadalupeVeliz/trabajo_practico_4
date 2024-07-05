@@ -12,7 +12,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -32,16 +31,22 @@ public class Docente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(name = "legajo", nullable = false, unique = true)
 	private String legajo;
+	
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
+	
 	@Column(name = "apelido", nullable = false)
 	private String apellido;
+	
 	@Column(name = "email", nullable = false)
 	private String email;
+	
 	@Column(name = "telefono", nullable = false)
 	private String telefono;
+	
 	@OneToMany(mappedBy = "docente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Materia> materias;
 }
