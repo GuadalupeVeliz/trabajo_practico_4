@@ -1,7 +1,5 @@
 package ar.edu.unju.fi.dto;
 
-import ar.edu.unju.fi.model.Carrera;
-import ar.edu.unju.fi.model.Docente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +17,8 @@ public class MateriaDTO {
 	private int curso;
 	private int cantidadHoras;
 	private Modalidad modalidad;
-	private Docente docente;
-	private Carrera carrera;
+	private DocenteDTO docenteDTO;
+	private CarreraDTO carreraDTO;
 
 	public enum Modalidad {
 		VIRTUAL, PRESENCIAL;

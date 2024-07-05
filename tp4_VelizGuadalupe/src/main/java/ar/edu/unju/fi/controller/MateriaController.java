@@ -55,8 +55,8 @@ public class MateriaController {
 	@PostMapping("/guardar")
 	public String guardarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, Model model,
 			RedirectAttributes redirectAttributes) {
-		unDocenteDTO = docenteService.getDocente(materiaDTO.getDocente().getId());
-		unaCarreraDTO = carreraService.getCarrera(materiaDTO.getCarrera().getId());
+		unDocenteDTO = docenteService.getDocente(materiaDTO.getDocenteDTO().getId());
+		unaCarreraDTO = carreraService.getCarrera(materiaDTO.getCarreraDTO().getId());
 		materiaService.saveMateria(unaMateriaDTO);
 		return "redirect:/materias/lista";
 	}
