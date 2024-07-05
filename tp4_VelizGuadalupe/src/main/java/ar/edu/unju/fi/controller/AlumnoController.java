@@ -3,6 +3,7 @@ package ar.edu.unju.fi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.service.AlumnoService;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,7 +22,7 @@ public class AlumnoController {
 
 	@Autowired
 	private AlumnoService alumnoService;
-	
+
 	private AlumnoDTO unAlumnoDTO;
 
 	@GetMapping("/lista")
@@ -38,9 +40,12 @@ public class AlumnoController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardarAlumno(@ModelAttribute("unAlumno") AlumnoDTO alumnoDTO, Model model,
-			RedirectAttributes redirectAttributes) {
-		
+	public String guardarAlumno(@Valid @ModelAttribute("unAlumno") AlumnoDTO alumnoDTO, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("unAlumno", alumnoDTO);
+			model.addAttribute("edicion", false);
+			return "alumnos/formAlumno";
+		}
 		alumnoService.saveAlumno(alumnoDTO);
 		return "redirect:/alumnos/lista";
 	}
@@ -58,16 +63,18 @@ public class AlumnoController {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarAlumno(@ModelAttribute("unAlumno") AlumnoDTO alumnoDTO, Model model,
-			RedirectAttributes redirectAttributes) {
-		
+	public String modificarAlumno(@Valid @ModelAttribute("unAlumno") AlumnoDTO alumnoDTO, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("unAlumno", alumnoDTO);
+			model.addAttribute("edicion", true);
+			return "alumnos/formAlumno";
+		}
 		alumnoService.editAlumno(alumnoDTO);
 		return "redirect:/alumnos/lista";
 	}
 
 	@GetMapping("/eliminar/{id}")
 	public String eliminarAlumno(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-		
 		alumnoService.deleteAlumno(id);
 		return "redirect:/alumnos/lista";
 	}
