@@ -3,11 +3,13 @@ package ar.edu.unju.fi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.service.DocenteService;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,9 +40,12 @@ public class DocenteController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardarDocente(@ModelAttribute("unDocente") DocenteDTO docenteDTO, Model model,
-			RedirectAttributes redirectAttributes) {
-		
+	public String guardarDocente(@Valid @ModelAttribute("unDocente") DocenteDTO docenteDTO, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("unDocente", docenteDTO);
+			model.addAttribute("edicion", false);
+			return "docentes/formDocente";
+		}
 		docenteService.saveDocente(docenteDTO);
 		return "redirect:/docentes/lista";
 	}
@@ -58,8 +63,12 @@ public class DocenteController {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarDocente(@ModelAttribute("unDocente") DocenteDTO docenteDTO, Model model, RedirectAttributes redirectAttributes) {
-		
+	public String modificarDocente(@Valid @ModelAttribute("unDocente") DocenteDTO docenteDTO, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("unDocente", docenteDTO);
+			model.addAttribute("edicion", true);
+			return "docentes/formDocente";
+		}
 		docenteService.editDocente(docenteDTO);
 		return "redirect:/docentes/lista";
 	}
