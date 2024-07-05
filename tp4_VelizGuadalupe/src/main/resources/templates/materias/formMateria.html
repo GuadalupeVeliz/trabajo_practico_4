@@ -73,25 +73,25 @@
 			</div>
 			<div class="mb-3">
 				<label for="docente" class="form-label">Docente a cargo:</label> <select
-					type="text" class="form-control" id="docente"
-					th:field="*{docente.id}"
-					th:classappend="${#fields.hasErrors('docente')} ? 'is-invalid' : ''">
+					class="form-control" id="docente" th:field="*{docenteDTO.id}"
+					th:classappend="${#fields.hasErrors('docenteDTO')} ? 'is-invalid' : ''">
 					<option th:each="d : ${docentes}" th:value="${d.id}"
-						th:text="${d.nombre}+' '+${d.apellido}"></option>
+						th:text="${d.nombre} + ' ' + ${d.apellido}"></option>
 				</select>
-				<p class="text-danger" th:if="${#fields.hasErrors('docente')}"
-					th:errors="*{docente}"></p>
+				<p class="form-text text-danger"
+					th:if="${#fields.hasErrors('docenteDTO')}"
+					th:errors="*{docenteDTO}"></p>
 			</div>
 			<div class="mb-4">
 				<label for="carrera" class="form-label">Carrera:</label> <select
-					type="text" class="form-control" id="carrera"
-					th:field="*{carrera.codigo}"
-					th:classappend="${#fields.hasErrors('carrera')} ? 'is-invalid' : ''">
-					<option th:each="c : ${carreras}" th:value="${c.codigo}"
+					class="form-control" id="carrera" th:field="*{carreraDTO.id}"
+					th:classappend="${#fields.hasErrors('carreraDTO')} ? 'is-invalid' : ''">
+					<option th:each="c : ${carreras}" th:value="${c.id}"
 						th:text="${c.nombre}"></option>
 				</select>
-				<p class="text-danger" th:if="${#fields.hasErrors('carrera')}"
-					th:errors="*{carrera}"></p>
+				<p class="form-text text-danger"
+					th:if="${#fields.hasErrors('carreraDTO')}"
+					th:errors="*{carreraDTO}"></p>
 			</div>
 			<div class="mb-3 d-flex">
 				<input type="submit" class="btn btn-light px-3"

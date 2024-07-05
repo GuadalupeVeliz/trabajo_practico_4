@@ -33,10 +33,6 @@ public class MateriaController {
 	@Autowired
 	private CarreraService carreraService;
 
-	private MateriaDTO unaMateriaDTO;
-	private DocenteDTO unDocenteDTO;
-	private CarreraDTO unaCarreraDTO;
-
 	@GetMapping("/lista")
 	public String getListaMateria(Model model) {
 		model.addAttribute("materias", materiaService.getMaterias());
@@ -45,7 +41,7 @@ public class MateriaController {
 
 	@GetMapping("/nuevo")
 	public String getNuevaMateria(Model model) {
-		unaMateriaDTO = new MateriaDTO();
+		MateriaDTO unaMateriaDTO = new MateriaDTO();
 		model.addAttribute("unaMateria", unaMateriaDTO);
 		model.addAttribute("modalidades", Modalidad.values());
 		model.addAttribute("docentes", docenteService.getDocentes());
@@ -59,18 +55,23 @@ public class MateriaController {
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			model.addAttribute("unaMateria", materiaDTO);
+			model.addAttribute("modalidades", Modalidad.values());
+			model.addAttribute("docentes", docenteService.getDocentes());
+			model.addAttribute("carreras", carreraService.getCarreras());
 			model.addAttribute("edicion", false);
 			return "materias/formMateria";
 		}
-		unDocenteDTO = docenteService.getDocente(materiaDTO.getDocenteDTO().getId());
-		unaCarreraDTO = carreraService.getCarrera(materiaDTO.getCarreraDTO().getId());
-		materiaService.saveMateria(unaMateriaDTO);
+		DocenteDTO unDocenteDTO = docenteService.getDocente(materiaDTO.getDocenteDTO().getId());
+		CarreraDTO unaCarreraDTO = carreraService.getCarrera(materiaDTO.getCarreraDTO().getId());
+		materiaDTO.setDocenteDTO(unDocenteDTO);
+		materiaDTO.setCarreraDTO(unaCarreraDTO);
+		materiaService.saveMateria(materiaDTO);
 		return "redirect:/materias/lista";
 	}
 
 	@GetMapping("/modificar/{id}")
 	public String getModificarMateria(@PathVariable("id") Long id, Model model) {
-		unaMateriaDTO = materiaService.getMateria(id);
+		MateriaDTO unaMateriaDTO = materiaService.getMateria(id);
 		if (unaMateriaDTO != null) {
 			model.addAttribute("unaMateria", unaMateriaDTO);
 			model.addAttribute("modalidades", Modalidad.values());
@@ -88,6 +89,9 @@ public class MateriaController {
 			Model model, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			model.addAttribute("unaMateria", materiaDTO);
+			model.addAttribute("modalidades", Modalidad.values());
+			model.addAttribute("docentes", docenteService.getDocentes());
+			model.addAttribute("carreras", carreraService.getCarreras());
 			model.addAttribute("edicion", true);
 			return "materias/formMateria";
 		}
