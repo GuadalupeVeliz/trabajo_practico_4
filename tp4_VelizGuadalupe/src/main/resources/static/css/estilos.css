@@ -24,6 +24,10 @@
 	background-color: var(--color-fondo);
 }
 
+.bg-form {
+	background-color: rgb(65, 175, 218);
+}
+
 .bg-oscuro {
 	background-color: var(--color-footer);
 }

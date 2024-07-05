@@ -27,20 +27,28 @@ public class Alumno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(name = "dni", nullable = false, unique = true)
 	private String dni;
+	
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
+	
 	@Column(name = "apelido", nullable = false)
 	private String apellido;
+	
 	@Column(name = "email", nullable = false)
 	private String email;
+	 
 	@Column(name = "telefono", nullable = false)
 	private String telefono;
+	
 	@Column(name = "fechaNacimiento", nullable = false)
 	private LocalDate fechaNacimiento;
+	
 	@Column(name = "domicilio", nullable = false)
 	private String domicilio;
+	
 	@Column(name = "lu", nullable = false)
 	private String lu;
 
