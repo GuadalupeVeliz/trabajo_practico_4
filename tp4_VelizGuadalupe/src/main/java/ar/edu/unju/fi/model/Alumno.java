@@ -1,14 +1,19 @@
 package ar.edu.unju.fi.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -52,5 +57,12 @@ public class Alumno {
 	@Column(name = "lu", nullable = false)
 	private String lu;
 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "alumnos_materias",
+			joinColumns = @JoinColumn(name = "id_alumno"),
+			inverseJoinColumns = @JoinColumn(name = "id_materia")
+	)
+	private List<Materia> materias;
 
 }
