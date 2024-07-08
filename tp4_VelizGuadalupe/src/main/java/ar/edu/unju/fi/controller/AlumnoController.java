@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.dto.AlumnoDTO;
+import ar.edu.unju.fi.dto.CarreraDTO;
 import ar.edu.unju.fi.dto.MateriaDTO;
 import ar.edu.unju.fi.service.AlumnoService;
+import ar.edu.unju.fi.service.CarreraService;
 import ar.edu.unju.fi.service.MateriaService;
 import jakarta.validation.Valid;
 
@@ -28,12 +30,16 @@ public class AlumnoController {
 
 	@Autowired
 	private AlumnoService alumnoService;
+	
+	@Autowired
+	private CarreraService carreraService;
 
 	@Autowired
 	private MateriaService materiaService;
 
 	private AlumnoDTO unAlumnoDTO;
 	private MateriaDTO unaMateriaDTO;
+	private CarreraDTO unaCarreraDTO;
 
 	@GetMapping("/lista")
 	public String getListaAlumno(Model model) {
@@ -46,18 +52,27 @@ public class AlumnoController {
 		AlumnoDTO unAlumnoDTO = new AlumnoDTO();
 		model.addAttribute("unAlumno", unAlumnoDTO);
 		model.addAttribute("edicion", false);
+		model.addAttribute("carreras", carreraService.getCarreras());
 		return "alumnos/formAlumno";
 	}
 
 	@PostMapping("/guardar")
 	public String guardarAlumno(@Valid @ModelAttribute("unAlumno") AlumnoDTO alumnoDTO, BindingResult result,
 			Model model) {
+		if (alumnoDTO.getCarrera().getId() == null) {
+			result.rejectValue("carrera.id", "NotNull", "Debe elegir una carrera.");
+		}
 		if (result.hasErrors()) {
 			model.addAttribute("unAlumno", alumnoDTO);
 			model.addAttribute("edicion", false);
+			model.addAttribute("carreras", carreraService.getCarreras());
 			return "alumnos/formAlumno";
 		}
-		alumnoService.saveAlumno(alumnoDTO);
+		unaCarreraDTO = carreraService.getCarrera(alumnoDTO.getCarrera().getId());
+		if (unaCarreraDTO != null) {
+			alumnoDTO.setCarrera(unaCarreraDTO);
+			alumnoService.saveAlumno(alumnoDTO);
+		}
 		return "redirect:/alumnos/lista";
 	}
 
@@ -67,6 +82,7 @@ public class AlumnoController {
 		if (unAlumnoDTO != null) {
 			model.addAttribute("unAlumno", unAlumnoDTO);
 			model.addAttribute("edicion", true);
+			model.addAttribute("carreras", carreraService.getCarreras());
 			return "alumnos/formAlumno";
 		} else {
 			return "redirect:/alumnos/lista";
@@ -76,12 +92,19 @@ public class AlumnoController {
 	@PostMapping("/modificar")
 	public String modificarAlumno(@Valid @ModelAttribute("unAlumno") AlumnoDTO alumnoDTO, BindingResult result,
 			Model model) {
+		if (alumnoDTO.getCarrera().getId() == null) {
+			result.rejectValue("carrera.id", "NotNull", "Debe elegir una carrera.");
+		}
 		if (result.hasErrors()) {
 			model.addAttribute("unAlumno", alumnoDTO);
 			model.addAttribute("edicion", true);
 			return "alumnos/formAlumno";
 		}
-		alumnoService.editAlumno(alumnoDTO);
+		unaCarreraDTO = carreraService.getCarrera(alumnoDTO.getCarrera().getId());
+		if (unaCarreraDTO != null) {
+			alumnoDTO.setCarrera(unaCarreraDTO);
+			alumnoService.editAlumno(alumnoDTO);
+		}
 		return "redirect:/alumnos/lista";
 	}
 

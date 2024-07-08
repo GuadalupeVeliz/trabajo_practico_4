@@ -14,9 +14,9 @@
 
 	<main class="container bg-fondo p-0 d-flex flex-column">
 		<div class="px-lg-5 pt-3">
-			
+
 			<a class="btn btn-dark mb-3 ms-3" th:href="@{/alumnos/lista}">Volver a la lista</a>
-			
+
 			<div class="card shadow card-detalle-alumno">
 				<h3 class="card-header py-3" th:text="${alumno.nombre} + ' ' + ${alumno.apellido}"></h3>
 				<ul class="list-group list-group-flush">
@@ -41,6 +41,12 @@
 							<strong class="mb-1">Libreta Universitaria:</strong>
 							<p class="ms-2 mb-0" th:text="${alumno.lu}"></p>
 						</div>
+						<div class="mb-3">
+							<strong class="mb-1">Carrera:</strong>
+							<p class="ms-2 mb-0" th:if="${alumno.carrera} != null" 
+								th:text="${alumno.carrera.nombre}"></p>
+							<p class="ms-2 mb-0" th:if="${alumno.carrera} == null">Sin carrera</p>
+						</div>
 					</li>
 					<div class="accordion" id="accordionExample">
 						<div class="accordion-item">
@@ -64,8 +70,8 @@
 					</div>
 				</ul>
 			</div>
-			
-			
+
+
 		</div>
 
 	</main>

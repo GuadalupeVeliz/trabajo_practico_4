@@ -1,4 +1,4 @@
-INSERT INTO `docentes` VALUES (1,'Rodriguez','juanca@gmail.com','01','Juan Carlos','3884858348'),(2,'Vega','arielvega@gmail.com','02','Ariel','3884950580'),(3,'Apaza','apaza@gmail.com','03','Carolina','3884374375'),(4,'Perez Ibarra','mperezi@gmail.com','004','Marcelo','3884504205'),(5,'Cañizares','canizares@gmail.com','005','Norma','3884945747');
+INSERT INTO `docentes` VALUES (1,'Rodriguez','juanca@gmail.com','01','Juan Carlos','3884858348'),(2,'Vega','arielvega@gmail.com','02','Ariel','3884950580'),(3,'Apaza','apaza@gmail.com','03','Carolina','3884374375'),(4,'Perez Ibarra','mperezi@gmail.com','04','Marcelo','3884504205'),(5,'Cañizares','canizares@gmail.com','05','Norma','3884945747');
 
 INSERT INTO `carreras` VALUES (3,0,1,'APU','Analista Programador Universitario'),(5,0,2,'INF','Ingeniería Informática'),(5,0,3,'INQ','Ingeniería Quimica'),(2,0,4,'TUDIVJ','Tecnicatura Universitaria en Diseño Integral de Videojuegos');
 

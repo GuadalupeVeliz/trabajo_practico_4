@@ -55,9 +55,10 @@
 					th:classappend="${#fields.hasErrors('telefono')} ? 'is-invalid' : ''">
 				<p class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></p>
 			</div>
-			<div class="mb-3 d-flex">
+			<div class="mb-3 d-flex justify-content-between align-items-center">
 				<input type="submit" class="btn btn-light px-3"
 					th:value="${edicion ? 'Guardar cambios' : 'Registrar'}"></input>
+				<a class="btn btn-dark" th:href="@{/docentes/lista}">Volver</a>
 			</div>
 
 		</form>
