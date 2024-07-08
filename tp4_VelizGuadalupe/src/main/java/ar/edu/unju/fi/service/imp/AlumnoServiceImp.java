@@ -10,7 +10,7 @@ import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.repository.AlumnoRepository;
 import ar.edu.unju.fi.service.AlumnoService;
-
+ 
 @Service
 public class AlumnoServiceImp implements AlumnoService {
 	
@@ -57,5 +57,13 @@ public class AlumnoServiceImp implements AlumnoService {
 	public void deleteAlumno(Long id) {
 		alumnoRepository.deleteById(id);
 	}
+	
+	@Override
+	 public List<AlumnoDTO> getAlumnosByCarreraId(Long carreraId) {
+	        return alumnoRepository.findById(carreraId)
+	                .stream()
+	                .map(alumnoMapper::alumnoToAlumnoDTO)
+	                .collect(Collectors.toList());
+	    }
 	
 }

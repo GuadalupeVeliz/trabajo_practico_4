@@ -53,4 +53,6 @@ public class AlumnoDTO {
 	
 	private List<MateriaDTO> materias;
 	
+	private CarreraDTO carrera; 
+
 }

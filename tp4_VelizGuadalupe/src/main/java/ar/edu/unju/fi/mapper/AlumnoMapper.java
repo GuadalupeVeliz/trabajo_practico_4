@@ -13,9 +13,11 @@ import ar.edu.unju.fi.model.Alumno;
 public interface AlumnoMapper {
 
 	@Mapping(target = "materias.alumnos", ignore = true)
+	@Mapping(target = "carrera", source = "carrera")
 	AlumnoDTO alumnoToAlumnoDTO(Alumno alumno); 
 	
 	@Mapping(target = "materias.alumnos", ignore = true)
+	@Mapping(target = "carrera", source = "carrera")
 	Alumno alumnoDTOToAlumno(AlumnoDTO alumnoDTO);
 	
 	List<AlumnoDTO> alumnoDTOListToAlumnoList(List<Alumno> alumnoList);

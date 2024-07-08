@@ -5,7 +5,7 @@ import java.util.List;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 
 public interface AlumnoService {
-
+ 
 	public AlumnoDTO getAlumno(Long id);
 	
 	public List<AlumnoDTO> getAlumnos();
@@ -16,4 +16,5 @@ public interface AlumnoService {
 	
 	public void deleteAlumno(Long id);
 	
+	List<AlumnoDTO> getAlumnosByCarreraId(Long carreraId);
 }
