@@ -57,4 +57,4 @@ public class Alumno {
 	 @ManyToOne
 	 @JoinColumn(name = "carrera_id")
 	 private Carrera carrera;
-}
+} 

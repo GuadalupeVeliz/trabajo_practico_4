@@ -11,7 +11,7 @@ import ar.edu.unju.fi.model.Alumno;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface AlumnoMapper {
-	
+	 
 	@Mapping(target = "carrera", source = "carrera")
 	AlumnoDTO alumnoToAlumnoDTO(Alumno alumno); 
 	

@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarreraDTO {
-	
+	 
 	private Long id;
 	private String codigo;
 	private String nombre;

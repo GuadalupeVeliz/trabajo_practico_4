@@ -50,5 +50,5 @@ public class AlumnoDTO {
 	@Size(min=4,max=4, message="El LU debe contener 4 dígitos.") 
 	private String lu;
 	
-	private CarreraDTO carrera;
+	private CarreraDTO carrera; 
 }
