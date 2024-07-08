@@ -47,5 +47,8 @@ public class Carrera {
     
     @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Materia> materias;
+    
+    @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Alumno> alumnos;
 }
 

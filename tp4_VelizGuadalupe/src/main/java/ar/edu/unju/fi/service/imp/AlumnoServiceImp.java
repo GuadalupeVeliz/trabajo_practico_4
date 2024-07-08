@@ -58,4 +58,12 @@ public class AlumnoServiceImp implements AlumnoService {
 		alumnoRepository.deleteById(id);
 	}
 	
+	@Override
+	 public List<AlumnoDTO> getAlumnosByCarreraId(Long carreraId) {
+	        return alumnoRepository.findById(carreraId)
+	                .stream()
+	                .map(alumnoMapper::alumnoToAlumnoDTO)
+	                .collect(Collectors.toList());
+	    }
+	
 }
