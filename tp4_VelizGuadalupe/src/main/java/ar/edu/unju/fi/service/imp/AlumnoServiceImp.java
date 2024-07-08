@@ -10,7 +10,7 @@ import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.repository.AlumnoRepository;
 import ar.edu.unju.fi.service.AlumnoService;
- 
+
 @Service
 public class AlumnoServiceImp implements AlumnoService {
 	

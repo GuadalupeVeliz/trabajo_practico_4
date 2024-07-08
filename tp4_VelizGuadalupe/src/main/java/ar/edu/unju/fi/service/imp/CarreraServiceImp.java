@@ -32,7 +32,7 @@ public class CarreraServiceImp implements CarreraService {
 		Carreras = new ArrayList<>();
 		Carreras.add(carrera1);
 		
-		Alumno alumno1 = new Alumno(1L, "12345678", "Juan", "Pérez", "juan.perez@example.com", "3884567890", LocalDate.of(1995, 5, 20), "Calle Falsa 123", "LU123456", carrera1);
+		Alumno alumno1 = new Alumno(1L, "12345678", "Juan", "Pérez", "juan.perez@example.com", "3884567890", LocalDate.of(1995, 5, 20), "Calle Falsa 123", "1234", carrera1);
 		Alumnos = new ArrayList<>();
 		Alumnos.add(alumno1);
 		

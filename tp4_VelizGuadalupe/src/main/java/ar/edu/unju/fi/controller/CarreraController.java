@@ -20,7 +20,7 @@ import ar.edu.unju.fi.service.CarreraService;
 
 @Controller
 @RequestMapping("/carreras")
-public class CarreraController {
+public class CarreraController { 
 
 	@Autowired
 	private CarreraService carreraService;

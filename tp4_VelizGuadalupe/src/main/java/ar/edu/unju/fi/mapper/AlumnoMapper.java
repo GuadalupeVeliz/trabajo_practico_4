@@ -8,7 +8,7 @@ import org.mapstruct.MappingConstants;
 
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.model.Alumno;
-
+ 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface AlumnoMapper {
 	 

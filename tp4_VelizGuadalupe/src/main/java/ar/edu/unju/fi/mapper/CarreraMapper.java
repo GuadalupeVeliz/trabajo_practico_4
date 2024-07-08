@@ -10,7 +10,7 @@ import ar.edu.unju.fi.model.Carrera;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CarreraMapper {
-	 
+	
 	CarreraDTO carreraToCarreraDTO (Carrera carrera);
 	
 	Carrera carreraDTOToCarrera (CarreraDTO carreraDTO);
