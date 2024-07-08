@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -50,5 +51,8 @@ public class AlumnoDTO {
 	@Size(min=4,max=4, message="El LU debe contener 4 dígitos.") 
 	private String lu;
 	
+	private List<MateriaDTO> materias;
+	
 	private CarreraDTO carrera; 
+
 }

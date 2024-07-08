@@ -1,0 +1,84 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Listado de alumnos FI</title>
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
+	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+	<nav th:replace="~{/layouts/header :: header}"></nav>
+
+	<main class="container bg-fondo p-0 d-flex flex-column">
+		<div class="px-lg-5 pt-3">
+
+			<a class="btn btn-dark mb-3 ms-3" th:href="@{/alumnos/lista}">Volver a la lista</a>
+
+			<div class="card shadow card-detalle-alumno">
+				<h3 class="card-header py-3" th:text="${alumno.nombre} + ' ' + ${alumno.apellido}"></h3>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">
+						<div class="mb-3">
+							<strong class="mb-1">DNI:</strong>
+							<p class="ms-2 mb-0" th:text="${alumno.dni}"></p>
+						</div>
+						<div class="mb-3">
+							<strong class="mb-1">Correo electronico:</strong>
+							<p class="ms-2 mb-0" th:text="${alumno.email}"></p>
+						</div>
+						<div class="mb-3">
+							<strong class="mb-1">Telefono:</strong>
+							<p class="ms-2 mb-0" th:text="${alumno.telefono}"></p>
+						</div>
+						<div class="mb-3">
+							<strong class="mb-1">Domicilio:</strong>
+							<p class="ms-2 mb-0" th:text="${alumno.domicilio}"></p>
+						</div>
+						<div class="mb-3">
+							<strong class="mb-1">Libreta Universitaria:</strong>
+							<p class="ms-2 mb-0" th:text="${alumno.lu}"></p>
+						</div>
+						<div class="mb-3">
+							<strong class="mb-1">Carrera:</strong>
+							<p class="ms-2 mb-0" th:if="${alumno.carrera} != null" 
+								th:text="${alumno.carrera.nombre}"></p>
+							<p class="ms-2 mb-0" th:if="${alumno.carrera} == null">Sin carrera</p>
+						</div>
+					</li>
+					<div class="accordion" id="accordionExample">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									<strong>Materias que cursa:</strong>
+								</button>
+							</h2>
+							<div id="collapseOne" class="accordion-collapse collapse show"
+								data-bs-parent="#accordionExample">
+								<div class="accordion-body d-flex flex-column">
+									<p class="mb-3" th:each="m : ${alumno.materias}" th:text="${m.nombre}"></p>
+									<p th:if="${alumno.materias.isEmpty()}">Aún no cursa ninguna materia</p>
+									<a class="btn btn-sm btn-primary my-4"
+										th:href="@{/alumnos/} + ${alumno.id} + '/incripcion-a-materia'">
+										Incribirse a una materia</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ul>
+			</div>
+
+
+		</div>
+
+	</main>
+
+	<footer th:replace="~{/layouts/footer :: footer}"></footer>
+
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

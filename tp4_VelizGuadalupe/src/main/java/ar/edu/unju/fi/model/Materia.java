@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.model;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
@@ -8,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -43,12 +46,15 @@ public class Materia {
 	private Modalidad modalidad;
 	
 	@ManyToOne
-	@JoinColumn(name="docente")
+	@JoinColumn(name="id_docente")
 	private Docente docente;
 	
 	@ManyToOne
-	@JoinColumn(name="carrera")
+	@JoinColumn(name="id_carrera")
 	private Carrera carrera;
+	
+	@ManyToMany(mappedBy = "materias")
+	private List<Alumno> alumnos;
 	
 	public enum Modalidad{
 		VIRTUAL,PRESENCIAL;

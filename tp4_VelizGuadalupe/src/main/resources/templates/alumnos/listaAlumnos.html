@@ -26,17 +26,14 @@
 			<div th:if="${msgRem}" th:text="${msgRem}" class="alert alert-danger" role="alert"></div>
 			<div th:if="${msgErr}" th:text="${msgErr}" class="alert alert-danger" role="alert"></div>
 			<div class="row px-3">
-				<div class="col-12 col-lg-4 col-xl-3 p-3" th:each="a : ${alumnos}">
-					<div class="card">
+				<div class="col-12 col-lg-4 p-3" th:each="a : ${alumnos}">
+					<div class="card shadow">
 						<div class="card-body">
 							<h5 class="card-title mb-3" th:text="${a.nombre} + ' ' + ${a.apellido}"></h5>
-							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="'DNI: ' + ${a.dni}"></h6>
-							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="'LU: ' + ${a.lu}"></h6>
-							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${a.email}"></h6>
-							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${a.telefono}"></h6>
-							<p class="card-text" th:text="${a.domicilio}"></p>
-							<a th:href="@{/alumnos/modificar/} + ${a.id}" class="card-link btn btn-sm btn-primary">Modificar</a>
-							<a href="#" class="card-link btn btn-sm btn-danger" data-bs-toggle="modal"
+							<h6 class="card-subtitle mb-4 text-body-secondary" th:text="'LU: ' + ${a.lu}"></h6>
+							<a th:href="@{/alumnos/detalles/} + ${a.id}" class="btn btn-sm btn-dark">Detalles</a>
+							<a th:href="@{/alumnos/modificar/} + ${a.id}" class="btn btn-sm btn-primary">Modificar</a>
+							<a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal"
 								th:data-bs-target="'#exampleModal'+${a.id}">Eliminar</a>
 						</div>
 					</div>

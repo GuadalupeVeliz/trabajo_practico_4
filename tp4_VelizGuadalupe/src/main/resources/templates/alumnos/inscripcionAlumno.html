@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Inscripcion a materias</title>
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
+	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+	<nav th:replace="~{/layouts/header :: header}"></nav>
+
+	<main class="container bg-fondo pt-3 pb-5">
+		<form class="form m-auto bg-form py-3 px-4 border-radius-5 color-white"
+			th:action="@{/alumnos/guardar-inscripcion-a-materia}" method="post" enctype="multipart/form-data">
+
+			<div class="mb-3">
+				<h3>Inscribirse a una Materia.</h3>
+			</div>
+
+			<div class="mb-3">
+				<input type="hidden" name="idAlumno" th:value="${alumno.id}" />
+			</div>
+
+			<div class="mb-3">
+				<label for="alumno" class="form-label">Alumno:</label>
+				<input type="text" class="form-control opacity-50"
+					th:value="${alumno.nombre} + ' ' + ${alumno.apellido}" readonly />
+			</div>
+
+			<div class="mb-5">
+				<label for="materia" class="form-label">Materia:</label>
+				<select class="form-control" th:if="${!materias.isEmpty()}" id="materia" name="idMateria">
+					<option th:each="m : ${materias}" th:value="${m.id}" th:text="${m.nombre}"></option>
+				</select>
+				<h5 th:if="${materias.isEmpty()}">No hay materias disponibles</h5>
+			</div>
+
+			<div class="mb-3 d-flex justify-content-between align-items-center">
+				<input type="submit" class="btn btn-light px-3" value="Inscribirse"></input>
+				<a class="btn btn-dark" th:href="@{/alumnos/detalles/}+${alumno.id}">Volver al perfil</a>
+			</div>
+		</form>
+	</main>
+
+	<footer th:replace="~{/layouts/footer :: footer}"></footer>
+
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

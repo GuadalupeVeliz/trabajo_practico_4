@@ -27,18 +27,18 @@
             <div th:if="${msgRem}" th:text="${msgRem}" class="alert alert-danger" role="alert"></div>
             <div th:if="${msgErr}" th:text="${msgErr}" class="alert alert-danger" role="alert"></div>
             <div class="row px-3">
-                <div class="col-12 col-lg-4 col-xl-3 p-3" th:each="c : ${carreras}">
+                <div class="col-12 col-lg-4 p-3" th:each="c : ${carreras}">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title mb-3" th:text="${c.nombre}"></h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary" th:text="'Código: ' + ${c.codigo}"></h6>
-                            <h6 class="card-subtitle mb-2 text-body-secondary" th:text="${c.estado}"></h6>
-                            <h6 class="card-subtitle mb-2 text-body-secondary" th:text="'Cantidad de años: ' + ${c.cantidadAnios}"></h6>
+                            <h6 class="card-subtitle mb-2 text-body-secondary" th:text="'Estado: '+${c.estado}"></h6>
+                            <h6 class="card-subtitle mb-4 text-body-secondary" th:text="'Cantidad de años: ' + ${c.cantidadAnios}"></h6>
                             <a th:href="@{/carreras/modificar/} + ${c.id}"
-                                class="card-link btn btn-sm btn-primary">Modificar</a>
-                            <a href="#" class="card-link btn btn-sm btn-danger" data-bs-toggle="modal"
+                                class="btn btn-sm btn-primary">Modificar</a>
+                            <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                 th:data-bs-target="'#exampleModal'+${c.id}">Eliminar</a>
-                            <a th:href="@{/carreras/{id}/alumnos(id=${c.id})}" class="card-link btn btn-sm btn-info">Ver Alumnos</a>
+                            <a th:href="@{/carreras/{id}/alumnos(id=${c.id})}" class="btn btn-sm btn-info">Ver Alumnos</a>
                         </div>
                     </div>
                 </div>

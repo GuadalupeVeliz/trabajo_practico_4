@@ -27,7 +27,7 @@ public class CarreraServiceImp implements CarreraService {
     @Autowired
     private CarreraMapper carreraMapper;
 
-	static {
+	/*static {
 		Carrera carrera1 = new Carrera(null, "INF", "Ingeniería Informática", 5, Estado.ACTIVO, null, Alumnos);
 		Carreras = new ArrayList<>();
 		Carreras.add(carrera1);
@@ -37,7 +37,7 @@ public class CarreraServiceImp implements CarreraService {
 		Alumnos.add(alumno1);
 		
 		carrera1.setAlumnos(Alumnos);
-	}
+	}*/
     
     @Override
     public CarreraDTO getCarrera(Long id) {

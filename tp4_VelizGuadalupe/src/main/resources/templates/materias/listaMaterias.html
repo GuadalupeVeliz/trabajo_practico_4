@@ -30,12 +30,10 @@
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title mb-3" th:text="${m.nombre}"></h5>
-							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${m.carrera.nombre}"></h6>
-							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${m.curso} + '° Año'"></h6>
+							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${m.carreraDTO.nombre}"></h6>
 							<h6 class="card-subtitle mb-2 text-body-secondary"
-								th:text="'Docente a cargo: ' + ${m.docente.nombre} + ' ' + ${m.docente.apellido}"></h6>
-							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="'Modalidad: ' + ${m.modalidad.toString()}"></h6>
-							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="'Cantidad de horas: ' + ${m.cantidadHoras}"></h6>
+								th:text="'Docente a cargo: ' + ${m.docenteDTO.nombre} + ' ' + ${m.docenteDTO.apellido}"></h6>
+							<h6 class="card-subtitle mb-2 text-body-secondary mb-4" th:text="'Modalidad: ' + ${m.modalidad.toString()}"></h6>
 							<a th:href="@{/materias/modificar/} + ${m.id}"
 								class="card-link btn btn-sm btn-primary">Modificar</a>
 							<a href="#" class="card-link btn btn-sm btn-danger" data-bs-toggle="modal"

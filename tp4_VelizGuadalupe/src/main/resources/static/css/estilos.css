@@ -12,6 +12,10 @@
 	--color-footer: #20232E;
 }
 
+main {
+	min-height: 100vh;
+}
+
 .bg-primario {
 	background-color: var(--color-primario);
 }
@@ -96,6 +100,10 @@
 	height: 450px;
 }
 
+.noticia-card {
+	background-color: #FFF;
+}
+
 .aside-btn {
 	background-color: var(--color-secundario);
 	color: #000;
@@ -112,4 +120,9 @@
 	max-width: 450px;
 }
 
+.card-detalle-alumno {
+	width: 100%;
+	max-width: 650px;
+	margin: 0 auto;
+}
 
