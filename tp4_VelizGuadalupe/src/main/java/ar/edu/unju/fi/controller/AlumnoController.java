@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequestMapping("/alumnos")
-public class AlumnoController {
+public class AlumnoController { 
 
 	@Autowired
 	private AlumnoService alumnoService;
