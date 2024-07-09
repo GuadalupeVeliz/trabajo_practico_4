@@ -2,25 +2,41 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <body>
-	<footer class="bg-oscuro color-white container-fluid" th:fragment="footer">
-		<div class="container m-auto row pt-5">
-			<div class="col-12 row">
-				<div class="d-flex flex-column col-12 col-md-6">
-					<p class="h4 mb-3">FACULTAD DE INGENIERÍA - UNJu</p>
-					<p>italo palanca N°10</p>
-					<p>San salvador de jujuy</p>
-					<p>info@fi.unju.edu.ar</p>
+	<footer id="pie-de-pagina" class="bg-dark text-white py-3">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 text-left text-md-right mb-4 mb-md-0">
+					<p>
+					<h4>FACULTAD DE INGIENERÍA - UNJu</h4>
+					<ul class="nav flex-column text-left">
+						<li><i class="bi bi-map-fill"></i> Ítalo Palanca Nº 10</li>
+						<li class="nav-item"><i class="bi bi-globe-americas"></i> San
+							Salvador De Jujuy<br>Jujuy - Argentina</li>
+						<li><i class="bi bi-envelope"></i> <a
+							href="mailto:info@fi.unju.edu.ar">info@fi.unju.edu.ar</a></li>
+						<li><i class="bi bi-telephone"> 388-422-1576</i></li>
+					</ul>
 				</div>
-				<div class="d-flex flex-column col-12 col-md-6">
-					<p class="h4 mb-3">REDES SOCIALES</p>
-					<a href="https://www.facebook.com/fiunju/" target="_blank">Facebook</a>
-					<a href="https://www.youtube.com/channel/UCgS9XJlKKSYI1oJ4lIOo77A" target="_blank">YouTube</a>
-					<a href="https://www.linkedin.com/school/facultad-de-ingenieria-unju" target="_blank">Linkedin</a>
-					<a href="https://www.instagram.com/fiunju/" target="_blank">Instagram</a>
+				<div class="col-md-4 text-rigth mb-3 mb-md-0">
+					<p>
+					<h4>Redes sociales</h4>
+					<ul class="nav justify-content-left"
+						style="list-style-type: none; padding-left: 0">
+						<li><a href="https://www.facebook.com/fiunju/"
+							class="nav-link text-white"><i class="bi bi-facebook"></i></a></li>
+						<li><a
+							href="https://www.youtube.com/channel/UCgS9XJlKKSYI1oJ4lIOo77A"
+							class="nav-link text-white"><i class="bi bi-youtube"></i></a></li>
+						<li><a
+							href="https://www.linkedin.com/school/facultad-de-ingenieria-unju"
+							class="nav-link text-white"><i class="bi bi-linkedin"></i></a></li>
+						<li><a href="https://www.instagram.com/fiunju/"
+							class="nav-link text-white"><i class="bi bi-instagram"></i></a></li>
+					</ul>
 				</div>
-			</div>
-			<div class="col-12 pt-3 pb-2 text-center">
-				<p class="h6">Guadalupe Véliz</p>
+				<div class="col-11 text-center mt-3">
+					<p>Copyright © 2014-2024 - Facultad de Ingeniería - UNJu - Grupo L</p>
+				</div>
 			</div>
 		</div>
 	</footer>
