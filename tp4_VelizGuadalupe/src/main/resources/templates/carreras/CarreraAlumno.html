@@ -8,42 +8,32 @@
     <link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head> 
 <body>
-    <nav th:re place="~{/layouts/header :: header}"></nav>
+    <nav th:replace="~{/layouts/header :: header}"></nav>
     <main class="container bg-fondo p-0 d-flex flex-column">
         <div class="bg-primario color-white">
             <h2 class="text-center py-3 px-3" th:text="'Alumnos de la Carrera: ' + ${carrera.nombre}"></h2>
         </div>
         <div class="pt-3 pb-5 px-3">
+			<a class="btn btn-dark mb-3 ms-3" th:href="@{/carreras/lista}">Volver a la lista</a>
             <div th:if="${carrera.alumnos.isEmpty()}">
                 <p>No hay alumnos inscritos en esta carrera.</p>
             </div>
             <div th:if="${!carrera.alumnos.isEmpty()}">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>DNI</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Email</th>
-                            <th>Teléfono</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="alumno : ${carrera.alumnos}">
-                            <td th:text="${alumno.dni}"></td>
-                            <td th:text="${alumno.nombre}"></td>
-                            <td th:text="${alumno.apellido}"></td>
-                            <td th:text="${alumno.email}"></td>
-                            <td th:text="${alumno.telefono}"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row">
+    			<div class="col-12 col-lg-4 p-3" th:each="a : ${carrera.alumnos}">
+        			<div class="card shadow">
+            			<div class="card-body">
+                		<h5 class="card-title mb-3" th:text="${a.nombre} + ' ' + ${a.apellido}"></h5>
+                		<h6 class="card-subtitle mb-4 text-body-secondary" th:text="'LU: ' + ${a.lu}"></h6>
+                		<a th:href="@{/alumnos/detalles/} + ${a.id}" class="btn btn-lg btn-dark"> Detalles </a>
+            		</div>
+        		</div>
+    			</div>
+			</div>
             </div>
-            <a class="btn btn-primary" th:href="@{/carreras/lista}">Volver</a>
         </div>
     </main>
     <footer th:replace="~{/layouts/footer :: footer}"></footer>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
-
