@@ -10,4 +10,5 @@ import ar.edu.unju.fi.model.Alumno;
 @Repository
 public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
 	List<Alumno> findByCarreraId(Long carreraId);
+	List<Alumno> findAlumnosByMateriasId(Long materiaId);
 }

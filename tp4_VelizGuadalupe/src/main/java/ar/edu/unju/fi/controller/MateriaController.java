@@ -18,11 +18,15 @@ import ar.edu.unju.fi.model.Materia.Modalidad;
 import ar.edu.unju.fi.service.CarreraService;
 import ar.edu.unju.fi.service.DocenteService;
 import ar.edu.unju.fi.service.MateriaService;
+import ar.edu.unju.fi.service.AlumnoService;
 import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/materias")
 public class MateriaController {
+	
+	@Autowired
+    private AlumnoService alumnoService;
 
 	@Autowired
 	private MateriaService materiaService;
@@ -104,5 +108,17 @@ public class MateriaController {
 		materiaService.deleteMateria(id);
 		return "redirect:/materias/lista";
 	}
+	
+	@GetMapping("/alumnos/{id}")
+    public String getAlumnosPorMateria(@PathVariable("id") Long id, Model model) {
+        MateriaDTO materiaDTO = materiaService.getMateria(id);
+        if (materiaDTO != null) {
+            model.addAttribute("materia", materiaDTO);
+            model.addAttribute("alumnos", alumnoService.getAlumnosPorMateria(id));
+            return "materias/alumnosPorMateria";
+        } else {
+            return "redirect:/materias/lista";
+        }
+    }
 
 }
