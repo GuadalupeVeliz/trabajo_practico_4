@@ -17,4 +17,6 @@ public interface AlumnoService {
 	public void deleteAlumno(Long id);
 	
 	List<AlumnoDTO> getAlumnosByCarreraId(Long carreraId);
+	
+	List<AlumnoDTO> getAlumnosPorMateria(Long materiaId);
 }

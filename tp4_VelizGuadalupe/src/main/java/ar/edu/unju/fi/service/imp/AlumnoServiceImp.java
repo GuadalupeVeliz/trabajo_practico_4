@@ -66,4 +66,10 @@ public class AlumnoServiceImp implements AlumnoService {
 	                .collect(Collectors.toList());
 	    }
 	
+	@Override
+    public List<AlumnoDTO> getAlumnosPorMateria(Long materiaId) {
+        List<Alumno> alumnos = alumnoRepository.findAlumnosByMateriasId(materiaId);
+        return alumnos.stream().map(alumno -> alumnoMapper.alumnoToAlumnoDTO(alumno)).collect(Collectors.toList());
+    }
+	
 }
