@@ -6,6 +6,7 @@
 	<title>Agregar un docente</title>
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -49,16 +50,16 @@
 					th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''">
 				<p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 			</div>
-			<div class="mb-3">
+			<div class="mb-5">
 				<label for="telefono" class="form-label">Telefono:</label>
 				<input type="number" class="form-control" id="telefono" th:field="*{telefono}"
 					th:classappend="${#fields.hasErrors('telefono')} ? 'is-invalid' : ''">
 				<p class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></p>
 			</div>
 			<div class="mb-3 d-flex justify-content-between align-items-center">
+				<a class="btn btn-lg btn-dark" th:href="@{/docentes/lista}"><i class="bi bi-arrow-return-left"></i></a>
 				<input type="submit" class="btn btn-light px-3"
 					th:value="${edicion ? 'Guardar cambios' : 'Registrar'}"></input>
-				<a class="btn btn-dark" th:href="@{/docentes/lista}">Volver</a>
 			</div>
 
 		</form>

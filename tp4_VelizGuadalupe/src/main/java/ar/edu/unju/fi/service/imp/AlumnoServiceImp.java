@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Carrera;
+import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.AlumnoRepository;
+import ar.edu.unju.fi.repository.CarreraRepository;
+import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.AlumnoService;
  
 @Service
@@ -16,6 +20,12 @@ public class AlumnoServiceImp implements AlumnoService {
 	
 	@Autowired
 	private AlumnoRepository alumnoRepository;
+	
+	@Autowired
+	private MateriaRepository materiaRepository;
+	
+	@Autowired
+	private CarreraRepository carreraRepository;
 	
 	@Autowired
 	private AlumnoMapper alumnoMapper;
@@ -55,7 +65,23 @@ public class AlumnoServiceImp implements AlumnoService {
 
 	@Override
 	public void deleteAlumno(Long id) {
-		alumnoRepository.deleteById(id);
+		Alumno alumno = alumnoRepository.findById(id).orElse(null);
+		
+		if (alumno != null) {
+			
+			Carrera carrera = alumno.getCarrera();
+			if (carrera != null) {
+				carrera.getAlumnos().remove(alumno);
+				carreraRepository.save(carrera);
+			}
+			
+			for (Materia materia : alumno.getMaterias()) {
+				materia.getAlumnos().remove(alumno);
+				materiaRepository.save(materia);
+			}
+			
+			alumnoRepository.deleteById(id);
+		}		
 	}
 	
 	@Override

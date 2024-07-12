@@ -87,9 +87,9 @@
 				<p class="form-text text-danger" th:if="${#fields.hasErrors('carrera.id')}" th:errors="*{carrera.id}"></p>
 			</div>
 			<div class="mb-3 d-flex justify-content-between align-items-center">
+				<a class="btn btn-lg btn-dark" th:href="@{/alumnos/lista}"><i class="bi bi-arrow-return-left"></i></a>
 				<button type="submit" class="btn btn-light"
 					th:text="${edicion ? 'Guardar cambios' : 'Registrar alumno'}"></button>
-				<a class="btn btn-lg btn-dark" th:href="@{/alumnos/lista}"><i class="bi bi-arrow-return-left"></i></a>
 			</div>
 
 		</form>

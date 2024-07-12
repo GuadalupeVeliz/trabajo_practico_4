@@ -29,26 +29,25 @@ import lombok.Setter;
 @Table(name = "Carreras")
 public class Carrera {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "codigo", nullable = false, unique = true)
-    private String codigo;
+	@Column(name = "codigo", nullable = false, unique = true)
+	private String codigo;
 
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
+	@Column(name = "nombre", nullable = false)
+	private String nombre;
 
-    @Column(name = "cantidadAnios", nullable = false)
-    private int cantidadAnios;
+	@Column(name = "cantidadAnios", nullable = false)
+	private int cantidadAnios;
 
-    @Column(name = "estado", nullable = false)
-    private CarreraDTO.Estado estado;
-    
-    @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Materia> materias;
-    
-    @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Alumno> alumnos;
-} 
+	@Column(name = "estado", nullable = false)
+	private CarreraDTO.Estado estado;
 
+	@OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Materia> materias;
+
+	@OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Alumno> alumnos;
+}

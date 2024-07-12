@@ -6,6 +6,7 @@
 	<title>Inscripcion a materias</title>
 	<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
 	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -39,8 +40,8 @@
 			</div>
 
 			<div class="mb-3 d-flex justify-content-between align-items-center">
+				<a class="btn btn-lg btn-dark" th:href="@{/alumnos/detalles/}+${alumno.id}"><i class="bi bi-arrow-return-left"></i></a>
 				<input type="submit" class="btn btn-light px-3" value="Inscribirse"></input>
-				<a class="btn btn-dark" th:href="@{/alumnos/detalles/}+${alumno.id}">Volver al perfil</a>
 			</div>
 		</form>
 	</main>

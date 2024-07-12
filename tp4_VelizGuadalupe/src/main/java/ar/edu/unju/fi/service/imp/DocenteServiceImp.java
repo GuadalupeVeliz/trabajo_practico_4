@@ -8,8 +8,14 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.mapper.DocenteMapper;
+import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.model.Docente;
+import ar.edu.unju.fi.model.Materia;
+import ar.edu.unju.fi.repository.AlumnoRepository;
+import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.repository.DocenteRepository;
+import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.DocenteService;
 
 @Service
@@ -17,6 +23,15 @@ public class DocenteServiceImp implements DocenteService {
 
 	@Autowired
 	private DocenteRepository docenteRepository;
+	
+	@Autowired
+	private MateriaRepository materiaRepository;
+	
+	@Autowired
+	private CarreraRepository carreraRepository;
+	
+	@Autowired
+	private AlumnoRepository alumnoRepository;
 	
 	@Autowired
 	private DocenteMapper docenteMapper;
@@ -56,6 +71,39 @@ public class DocenteServiceImp implements DocenteService {
 
 	@Override
 	public void deleteDocente(Long id) {
-		docenteRepository.deleteById(id);
+		Docente docente = docenteRepository.findById(id).orElse(null);
+		
+		if (docente != null) {
+			
+			Materia materiaDelDocente = materiaRepository.findAll().stream()
+					.filter((materia) -> {
+						if (materia.getDocente().getId() == docente.getId())
+							return true;
+						else
+							return false;
+					})
+					.collect(Collectors.toList())
+					.get(0);
+			
+			
+			if (materiaDelDocente != null) {
+				
+				Carrera carrera = materiaDelDocente.getCarrera();
+				if (carrera != null) {
+					carrera.getMaterias().remove(materiaDelDocente);
+					carreraRepository.save(carrera);
+				}
+				
+				for (Alumno alumno : materiaDelDocente.getAlumnos()) {
+					alumno.getMaterias().remove(materiaDelDocente);
+					alumnoRepository.save(alumno);
+				}
+				
+				materiaRepository.deleteById(materiaDelDocente.getId());
+			}
+			
+			docenteRepository.deleteById(id);
+		}		
 	}
+	
 }

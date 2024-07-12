@@ -57,7 +57,7 @@ public class Alumno {
 	@Column(name = "lu", nullable = false)
 	private String lu;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "alumnos_materias",
 			joinColumns = @JoinColumn(name = "id_alumno"),
@@ -65,7 +65,7 @@ public class Alumno {
 	)
 	private List<Materia> materias;
 
-	 @ManyToOne
+	 @ManyToOne(fetch = FetchType.EAGER)
 	 @JoinColumn(name = "carrera_id")
 	 private Carrera carrera;
 } 

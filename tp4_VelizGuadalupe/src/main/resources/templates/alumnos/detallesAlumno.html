@@ -13,9 +13,12 @@
 	<nav th:replace="~{/layouts/header :: header}"></nav>
 
 	<main class="container bg-fondo p-0 d-flex flex-column">
-		<div class="px-lg-5 pt-3">
+		<div class="bg-primario color-white">
+			<h2 class="text-center py-3">Detalles de alumno</h2>
+		</div>
+		<div class="px-lg-5 pt-3 pb-5">
 
-			<a class="btn btn-dark mb-3 ms-3" th:href="@{/alumnos/lista}">Volver a la lista</a>
+			<a class="btn btn-dark my-3 ms-3" th:href="@{/alumnos/lista}">Volver a la lista</a>
 
 			<div class="card shadow card-detalle-alumno">
 				<h3 class="card-header py-3" th:text="${alumno.nombre} + ' ' + ${alumno.apellido}"></h3>
