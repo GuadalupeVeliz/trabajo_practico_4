@@ -8,6 +8,7 @@
 <link th:rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<link rel="icon" href="/images/favicon.png" type="image/png">
 </head>
 
 <body>
@@ -46,7 +47,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="curso" class="form-label">Año de curso:</label> <input
-					type="number" class="form-control" min="1" max="7" id="curso"
+					type="number" class="form-control" id="curso"
 					th:field="*{curso}"
 					th:classappend="${#fields.hasErrors('curso')} ? 'is-invalid' : ''">
 				<p class="form-text text-danger"
