@@ -39,7 +39,7 @@
 				<label for="cantidadAnios" class="form-label">Cantidad de Años:</label>
 				<input type="number" class="form-control" id="cantidadAnios" th:field="*{cantidadAnios}" required>
 			</div>
-			<div class="mb-3">
+			<div class="mb-5">
 				<label for="estado" class="form-label">Estado:</label>
 				<select type="text" class="form-control" id="estado" th:field="*{estado}" required>
 				<option th:each="m : ${estados}" th:value="${m}"
@@ -47,9 +47,9 @@
 				</select>
 			</div>
 			<div class="mb-3 d-flex justify-content-between align-items-center">
+				<a class="btn btn-dark btn-lg" th:href="@{/carreras/lista}"><i class="bi bi-arrow-return-left"></i></a>
 				<input type="submit" class="btn btn-light px-3"
 					th:value="${edicion ? 'Guardar cambios' : 'Registrar'}"></input>
-				<a class="btn btn-dark btn-lg" th:href="@{/carreras/lista}"><i class="bi bi-arrow-return-left"></i></a>
 			</div>
 
 		</form>

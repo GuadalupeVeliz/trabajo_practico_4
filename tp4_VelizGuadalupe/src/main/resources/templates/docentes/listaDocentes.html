@@ -21,7 +21,7 @@
 		</div>
 		<div class="pt-3 pb-5 px-3">
 			<div class="d-flex">
-				<a class="btn btn-dark btn-lg text-center py-2 mb-3" th:href="@{/docentes/nuevo}"><i class="bi bi-person-plus"></i></a>
+				<a class="btn btn-dark btn-lg text-center py-2 my-3 ms-3" th:href="@{/docentes/nuevo}"><i class="bi bi-person-plus"></i></a>
 			</div>
 			<div th:if="${msgAdd}" th:text="${msgAdd}" class="alert alert-success" role="alert"></div>
 			<div th:if="${msgEdit}" th:text="${msgEdit}" class="alert alert-warning" role="alert"></div>
@@ -30,13 +30,13 @@
 			<div class="row px-3">
 				<div class="col-12 col-lg-4 col-xl-3 p-3" th:each="d : ${docentes}">
 					<div class="card">
-						<div class="card-body">
+						<div class="card-body shadow">
 							<h5 class="card-title mb-3" th:text="${d.nombre} + ' ' + ${d.apellido}"></h5>
 							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${d.email}"></h6>
-							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="'Legajo: ' + ${d.legajo}"></h6>
+							<h6 class="card-subtitle mb-5 text-body-secondary" th:text="'Legajo: ' + ${d.legajo}"></h6>
 							<a th:href="@{/docentes/modificar/} + ${d.id}"
-								class="card-link btn btn-lg btn-primary"><i class="bi bi-person-fill-gear"></i></a>
-							<a href="#" class="card-link btn btn-lg btn-danger" data-bs-toggle="modal"
+								class="btn btn-lg btn-primary me-2"><i class="bi bi-person-fill-gear"></i></a>
+							<a href="#" class="btn btn-lg btn-danger" data-bs-toggle="modal"
 								th:data-bs-target="'#exampleModal'+${d.id}"><i class="bi bi-trash3"></i></a>
 						</div>
 					</div>
@@ -58,8 +58,8 @@
 							th:text="${d.nombre}+' '+${d.apellido}+' con legajo: '+${d.legajo}"></span>?
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 						<a class="btn btn-danger" th:href="@{/docentes/eliminar/}+${d.id}">Eliminar</a>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 					</div>
 				</div>
 			</div>

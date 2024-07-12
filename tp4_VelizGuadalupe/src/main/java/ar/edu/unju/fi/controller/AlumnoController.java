@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.dto.CarreraDTO;
 import ar.edu.unju.fi.dto.MateriaDTO;
+import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.service.AlumnoService;
 import ar.edu.unju.fi.service.CarreraService;
 import ar.edu.unju.fi.service.MateriaService;
@@ -118,10 +119,19 @@ public class AlumnoController {
 	public String getInscripcionMateria(@PathVariable("id") Long id, Model model) {
 		unAlumnoDTO = alumnoService.getAlumno(id);
 		List<MateriaDTO> materiasDelAlumno = unAlumnoDTO.getMaterias();
-		List<MateriaDTO> materiasNoInscriptas = materiaService.getMaterias().stream()
+		
+		List<MateriaDTO> materiasDeLaCarrera = materiaService.getMaterias().stream()
 				.filter((materia) -> {
-					for (MateriaDTO materiaDelAlumno : materiasDelAlumno) {
-						if (materiaDelAlumno.getCodigo().equals(materia.getCodigo())) {
+					if (materia.getCarreraDTO().getId().equals(unAlumnoDTO.getCarrera().getId())) {
+						return true;
+					}
+					return false;
+				}).collect(Collectors.toList());
+		
+		List<MateriaDTO> materiasNoInscriptas = materiasDeLaCarrera.stream()
+				.filter((materia) -> {
+					for (MateriaDTO m : materiasDelAlumno) {
+						if (m.getId().equals(materia.getId())) {
 							return false;
 						}
 					}
