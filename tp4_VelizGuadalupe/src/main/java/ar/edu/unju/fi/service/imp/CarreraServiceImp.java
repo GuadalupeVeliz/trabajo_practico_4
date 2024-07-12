@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.service.imp;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,63 +19,57 @@ import ar.edu.unju.fi.service.CarreraService;
 
 @Service
 public class CarreraServiceImp implements CarreraService {
-	
-	private static List<Carrera> Carreras;
-	private static List<Alumno> Alumnos;
 
-    @Autowired
-    private CarreraRepository carreraRepository;
+	private static final Logger logger = LoggerFactory.getLogger(CarreraServiceImp.class);
 
-    @Autowired
-    private CarreraMapper carreraMapper;
+	@Autowired
+	private CarreraRepository carreraRepository;
 
-	/*static {
-		Carrera carrera1 = new Carrera(null, "INF", "Ingeniería Informática", 5, Estado.ACTIVO, null, Alumnos);
-		Carreras = new ArrayList<>();
-		Carreras.add(carrera1);
-		
-		Alumno alumno1 = new Alumno(1L, "12345678", "Juan", "Pérez", "juan.perez@example.com", "3884567890", LocalDate.of(1995, 5, 20), "Calle Falsa 123", "LU123456", carrera1);
-		Alumnos = new ArrayList<>();
-		Alumnos.add(alumno1);
-		
-		carrera1.setAlumnos(Alumnos);
-	}*/
-    
-    @Override
-    public CarreraDTO getCarrera(Long id) {
-        Carrera carrera = carreraRepository.findById(id).orElse(null);
-        if (carrera != null) {
-            CarreraDTO carreraDTO = carreraMapper.carreraToCarreraDTO(carrera);
-            return carreraDTO;
-        }
-        return null;
-    }  
+	@Autowired
+	private CarreraMapper carreraMapper;
 
-    @Override
-    public List<CarreraDTO> getCarreras() {
-        List<Carrera> carreras = carreraRepository.findAll();
-        return carreras.stream()
-                .map(carrera -> {
-                	return carreraMapper.carreraToCarreraDTO(carrera);
-                })
-                .collect(Collectors.toList());
-    }
+	@Override
+	public CarreraDTO getCarrera(Long id) {
+		Carrera carrera = carreraRepository.findById(id).orElse(null);
+		if (carrera != null) {
+			CarreraDTO carreraDTO = carreraMapper.carreraToCarreraDTO(carrera);
+			logger.info("Carrera encontrada con id: {}", id);
+			return carreraDTO;
+		}
+		logger.warn("Carrera con id: {} no encontrada", id);
+		return null;
+	}
 
-    @Override
-    public void saveCarrera(CarreraDTO carreraDTO) {
-        Carrera carrera = carreraMapper.carreraDTOToCarrera(carreraDTO);
-        carreraRepository.save(carrera);
-    }
+	@Override
+	public List<CarreraDTO> getCarreras() {
+		List<Carrera> carreras = carreraRepository.findAll();
+		logger.info("Se obtuvieron {} carreras", carreras.size());
+		return carreras.stream().map(carrera -> {
+			return carreraMapper.carreraToCarreraDTO(carrera);
+		}).collect(Collectors.toList());
+	}
 
-    @Override
-    public void editCarrera(CarreraDTO carreraDTO) {
-        Carrera carrera = carreraMapper.carreraDTOToCarrera(carreraDTO);
-        carreraRepository.save(carrera);
-    }
+	@Override
+	public void saveCarrera(CarreraDTO carreraDTO) {
+		Carrera carrera = carreraMapper.carreraDTOToCarrera(carreraDTO);
+		carreraRepository.save(carrera);
+		logger.info("Carrera guardada con éxito: {}", carreraDTO);
+	}
 
-    @Override
-    public void deleteCarrera(Long id) {
-        carreraRepository.deleteById(id);
-    }
+	@Override
+	public void editCarrera(CarreraDTO carreraDTO) {
+		Carrera carrera = carreraMapper.carreraDTOToCarrera(carreraDTO);
+		carreraRepository.save(carrera);
+		logger.info("Carrera editada con éxito: {}", carreraDTO);
+	}
+
+	@Override
+	public void deleteCarrera(Long id) {
+		if (carreraRepository.existsById(id)) {
+			carreraRepository.deleteById(id);
+			logger.info("Carrera con id: {} eliminada con éxito", id);
+		} else {
+			logger.warn("Carrera con id: {} no encontrada para eliminar", id);
+		}
+	}
 }
-
