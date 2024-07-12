@@ -58,8 +58,8 @@
 							th:text="${d.nombre}+' '+${d.apellido}+' con legajo: '+${d.legajo}"></span>?
 					</div>
 					<div class="modal-footer">
-						<a class="btn btn-danger" th:href="@{/docentes/eliminar/}+${d.id}">Eliminar</a>
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+						<a class="btn btn-danger" th:href="@{/docentes/eliminar/}+${d.id}">Eliminar</a>
 					</div>
 				</div>
 			</div>

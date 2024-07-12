@@ -99,6 +99,7 @@ public class AlumnoController {
 		if (result.hasErrors()) {
 			model.addAttribute("unAlumno", alumnoDTO);
 			model.addAttribute("edicion", true);
+			model.addAttribute("carreras", carreraService.getCarreras());
 			return "alumnos/formAlumno";
 		}
 		unaCarreraDTO = carreraService.getCarrera(alumnoDTO.getCarrera().getId());
