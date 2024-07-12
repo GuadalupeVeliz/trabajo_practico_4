@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Detalles Docentes FI</title>
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
+	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+
+<body>
+
+	<nav th:replace="~{/layouts/header :: header}"></nav>
+
+	<main class="container bg-fondo p-0 d-flex flex-column">
+		<div class="bg-primario color-white">
+			<h2 class="text-center py-3">Detalles del Docente</h2>
+		</div>
+		<div class="px-lg-5 pt-3 pb-5">
+
+			<a class="btn btn-dark my-3 ms-3" th:href="@{/docentes/lista}">Volver a la lista</a>
+
+			<div class="card shadow card-detalle-alumno">
+				<h3 class="card-header py-3" th:text="${docente.nombre} + ' ' + ${docente.apellido}"></h3>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">
+						<div class="mb-3">
+							<strong class="mb-1">Legajo:</strong>
+							<p class="ms-2 mb-0" th:text="${docente.legajo}"></p>
+						</div>
+						<div class="mb-3">
+							<strong class="mb-1">Correo electronico:</strong>
+							<p class="ms-2 mb-0" th:text="${docente.email}"></p>
+						</div>
+						<div class="mb-3">
+							<strong class="mb-1">Telefono:</strong>
+							<p class="ms-2 mb-0" th:text="${docente.telefono}"></p>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+
+
+		</div>
+
+	</main>
+
+	<footer th:replace="~{/layouts/footer :: footer}"></footer>
+
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
