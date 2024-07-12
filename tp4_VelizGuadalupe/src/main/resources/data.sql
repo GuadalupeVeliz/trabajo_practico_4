@@ -38,7 +38,16 @@ INSERT INTO `carreras` VALUES
 INSERT INTO `materias` VALUES 
 (90,2,0,1,1,2,'AP013','Programacion Visual'),
 (70,2,0,2,1,5,'AP014','Laboratorio de Sistemas Operativos II'),
-(120,1,0,3,2,4,'APU03','Programacion Estructurada');
+(120,1,0,3,1,4,'APU03','Programacion Estructurada'),
+(100, 2, 0, 4, 2, 3, 'INF101', 'Algoritmos y Estructuras de Datos'),
+(110, 3, 1, 5, 2, 6, 'INF201', 'Sistemas Operativos'),
+(120, 4, 1, 6, 2, 9, 'INF301', 'Redes de Computadoras'),
+(80, 1, 0, 7, 3, 11, 'ADM101', 'Introducción a la Administración'),
+(90, 2, 0, 8, 3, 11, 'ADM201', 'Contabilidad Financiera'),
+(100, 3, 1, 9, 3, 12, 'ADM301', 'Marketing'),
+(120, 1, 0, 10, 11, 17, 'ING101', 'Cálculo I'),
+(100, 2, 0, 11, 11, 18, 'ING201', 'Física I'),
+(120, 3, 1, 12, 11, 19, 'ING301', 'Estructuras I');
 
 INSERT INTO `alumnos` VALUES 
 ('2001-08-11', 1, 4, 'Véliz', '43527103', 'Gral Savio, Palpala', 'luveliz@gmail.com', '4317', 'Guadalupe', '3884334777'),
