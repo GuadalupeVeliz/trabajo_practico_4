@@ -28,12 +28,13 @@
 			<div th:if="${msgRem}" th:text="${msgRem}" class="alert alert-danger" role="alert"></div>
 			<div th:if="${msgErr}" th:text="${msgErr}" class="alert alert-danger" role="alert"></div>
 			<div class="row px-3">
-				<div class="col-12 col-lg-4 col-xl-3 p-3" th:each="d : ${docentes}">
+				<div class="col-12 col-lg-4 p-3" th:each="d : ${docentes}">
 					<div class="card">
 						<div class="card-body shadow">
 							<h5 class="card-title mb-3" th:text="${d.nombre} + ' ' + ${d.apellido}"></h5>
 							<h6 class="card-subtitle mb-2 text-body-secondary" th:text="${d.email}"></h6>
 							<h6 class="card-subtitle mb-5 text-body-secondary" th:text="'Legajo: ' + ${d.legajo}"></h6>
+							<a th:href="@{/docentes/detalles/} + ${d.id}" class="btn btn-lg btn-secondary me-2"><i class="bi bi-card-list"></i></a>
 							<a th:href="@{/docentes/modificar/} + ${d.id}"
 								class="btn btn-lg btn-primary me-2"><i class="bi bi-person-fill-gear"></i></a>
 							<a href="#" class="btn btn-lg btn-danger" data-bs-toggle="modal"

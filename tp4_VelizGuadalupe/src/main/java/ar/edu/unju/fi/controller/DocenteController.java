@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.service.DocenteService;
+import ar.edu.unju.fi.service.MateriaService;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,9 @@ public class DocenteController {
 	
 	@Autowired
 	private DocenteService docenteService; 
+	
+	@Autowired
+	private MateriaService materiaService;
 	
 	private DocenteDTO unDocenteDTO;
 
@@ -80,4 +84,10 @@ public class DocenteController {
 		return "redirect:/docentes/lista";
 	}
 
+	@GetMapping("/detalles/{id}")
+	public String getDetallesDocente(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("docente", docenteService.getDocente(id));
+		model.addAttribute("materias", materiaService.getMaterias());
+		return "docentes/detallesDocente";
+	}
 }
