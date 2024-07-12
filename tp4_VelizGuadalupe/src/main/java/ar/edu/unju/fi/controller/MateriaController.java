@@ -79,7 +79,7 @@ public class MateriaController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, BindingResult result, Model model,
+	public String guardarMateria(@Valid @ModelAttribute("unaMateria") MateriaDTO materiaDTO, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			model.addAttribute("unaMateria", materiaDTO);
@@ -156,7 +156,7 @@ public class MateriaController {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarMateria(@ModelAttribute("unaMateria") MateriaDTO materiaDTO, BindingResult result,
+	public String modificarMateria(@Valid @ModelAttribute("unaMateria") MateriaDTO materiaDTO, BindingResult result,
 			Model model, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			model.addAttribute("unaMateria", materiaDTO);
