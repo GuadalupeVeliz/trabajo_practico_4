@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import ar.edu.unju.fi.dto.CarreraDTO;
 import ar.edu.unju.fi.dto.CarreraDTO.Estado;
 import ar.edu.unju.fi.service.AlumnoService;
 import ar.edu.unju.fi.service.CarreraService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/carreras")
@@ -31,7 +33,6 @@ public class CarreraController {
 		model.addAttribute("carreras", carreraService.getCarreras());
 		return "carreras/listaCarreras";
 	}
-	
 
 	@GetMapping("/nuevo")
 	public String getNuevoCarrera(Model model) {
@@ -43,9 +44,13 @@ public class CarreraController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardarCarrera(@ModelAttribute("unaCarrera") CarreraDTO carreraDTO, Model model,
-			RedirectAttributes redirectAttributes) {
-		
+	public String guardarCarrera(@Valid @ModelAttribute("unaCarrera") CarreraDTO carreraDTO, BindingResult result,
+			Model model, RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			model.addAttribute("estados", CarreraDTO.Estado.values());
+			model.addAttribute("edicion", false);
+			return "carreras/formCarrera";
+		}
 		carreraService.saveCarrera(carreraDTO);
 		return "redirect:/carreras/lista";
 	}
@@ -64,8 +69,13 @@ public class CarreraController {
 	}
 
 	@PostMapping("/modificar")
-	public String modificarCarrera(@ModelAttribute("unaCarrera") CarreraDTO carreraDTO, Model model,
-			RedirectAttributes redirectAttributes) {
+	public String modificarCarrera(@Valid @ModelAttribute("unaCarrera") CarreraDTO carreraDTO, BindingResult result,
+			Model model, RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			model.addAttribute("estados", CarreraDTO.Estado.values());
+			model.addAttribute("edicion", true);
+			return "carreras/formCarrera";
+		}
 		carreraService.editCarrera(carreraDTO);
 		return "redirect:/carreras/lista";
 	}
@@ -75,16 +85,16 @@ public class CarreraController {
 		carreraService.deleteCarrera(id);
 		return "redirect:/carreras/lista";
 	}
-	
+
 	@GetMapping("/{id}/alumnos")
 	public String getCarreraAlumnos(@PathVariable("id") Long id, Model model) {
-	    CarreraDTO carreraDTO = carreraService.getCarrera(id);
-	    if (carreraDTO != null) {
-	        model.addAttribute("carrera", carreraDTO);
-	        return "carreras/CarreraAlumno";
-	    } else {
-	        return "redirect:/carreras/lista";
-	    }
+		CarreraDTO carreraDTO = carreraService.getCarrera(id);
+		if (carreraDTO != null) {
+			model.addAttribute("carrera", carreraDTO);
+			return "carreras/CarreraAlumno";
+		} else {
+			return "redirect:/carreras/lista";
+		}
 	}
- 
+
 }
