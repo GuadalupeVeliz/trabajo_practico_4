@@ -60,7 +60,7 @@ public class CarreraServiceImp implements CarreraService {
 	public void editCarrera(CarreraDTO carreraDTO) {
 		Carrera carrera = carreraMapper.carreraDTOToCarrera(carreraDTO);
 		carreraRepository.save(carrera);
-		logger.info("Carrera editada con éxito: {}", carreraDTO);
+		logger.info("Carrera editada con éxito: {}", carreraDTO.getNombre());
 	}
 
 	@Override
